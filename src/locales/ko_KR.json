@@ -1,0 +1,33 @@
+{
+  "message": "ASDASDASDASDASD",
+  "hello": {
+    "name": "{user}님 안녕하세요."
+  },
+  "login": {
+    "signUp": "회원가입",
+    "signIn": "로그인",
+    "logout": "로그아웃",
+    "findId": "아이디 찾기",
+    "findPw": "비밀번호 찾기",
+    "loginId": "아이디",
+    "password": "비밀번호",
+    "password.check": "비밀번호 확인",
+    "name": "이름",
+    "nickname": "닉네임",
+    "email": "이메일",
+    "genderTypes":"성별",
+    "birth":"생년월일"
+  },
+  "footer": {
+    "info": "We are a site that shares information for 'Living for a Month.'",
+    "menu": {
+      "help": "Help",
+      "link": "Links",
+      "news": {
+        "letter": "News Letter",
+        "info": "Get more information about living a month through e-mail~!",
+        "subscribe": "Subscribe"
+      }
+    }
+  }
+}
