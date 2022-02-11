@@ -15,19 +15,78 @@
     "name": "이름",
     "nickname": "닉네임",
     "email": "이메일",
-    "genderTypes":"성별",
-    "birth":"생년월일"
+    "genderTypes": "성별",
+    "birth": "생년월일"
   },
   "footer": {
-    "info": "We are a site that shares information for 'Living for a Month.'",
+    "info": "'한달 살기'를 위한 정보를 공유하는 사이트입니다.",
     "menu": {
-      "help": "Help",
-      "link": "Links",
+      "help": "고객 센터",
+      "link": "바로가기",
       "news": {
-        "letter": "News Letter",
-        "info": "Get more information about living a month through e-mail~!",
-        "subscribe": "Subscribe"
+        "letter": "뉴스레터",
+        "info": "더 많은 한달살기 정보를 메일로 받아보세요~!",
+        "subscribe": "구독하기"
       }
     }
+  },
+  "menu": {
+    "city": "도시 소개",
+    "schedule": "스케줄",
+    "otherSchedule": "다른 사람 스케줄",
+    "mySchedule": "내 스케줄",
+    "review": "후기 게시판",
+    "myPage": "내 정보",
+    "customerCenter": "고객 센터"
+  },
+  "city": {
+    "info": {
+      "title": "'한달살기' 추천 도시"
+    },
+    "transport": {
+      "grade": {
+        "GOOD": "좋음",
+        "FAIR": "보통",
+        "POOR": "나쁨"
+      },
+      "name": {
+        "SUB": "지하철역",
+        "BUS": "버스정류장",
+        "BYC": "공공자전거",
+        "B_TER": "버스터미널",
+        "TRA": "기차역",
+        "AIR": "공항"
+      }
+    },
+    "tab": {
+      "intro": "도시 소개",
+      "transport": "교통 정보",
+      "transport": {
+        "infoTitle": "정류장 및 노선 개수",
+        "source": "출처 : 교통정보"
+      },
+      "weather": "전년도 기온 정보",
+      "weather": {
+        "source": "출처 : 기상청 홈페이지",
+        "infoTitle": "전년도 월 평균 기온",
+        "high": "최고",
+        "avg": "평균",
+        "low": "최저"
+      }
+    },
+    "name": {
+      "SE": "서울",
+      "GN": "강릉",
+      "GJ": "경주",
+      "BS": "부산",
+      "YS": "여수",
+      "JJ": "제주"
+    }
+  },
+  "customerCenter": {
+    "faq": "자주 묻는 질문들",
+    "personalTerms": "개인정보 처리방침",
+    "termsAndConditions": "이용 약관",
+    "notice": "공지사항"
   }
 }

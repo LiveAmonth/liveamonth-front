@@ -1,4 +1,15 @@
+const target = 'http://localhost:8081';
+
 module.exports = {
+  devServer:{
+    port:8080,
+    proxy:{
+      '^/v1/api':{
+        target,
+        changeOrigin: true
+      }
+    }
+  },
   css: {
     loaderOptions: {
       sass: {

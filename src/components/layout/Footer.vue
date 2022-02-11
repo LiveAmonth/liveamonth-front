@@ -23,7 +23,7 @@
             </ul>
           </div>
           <div class="col-2">
-            <h5>{{ $t("customerCenter") }}</h5>
+            <h5>{{ $t("menu.customerCenter") }}</h5>
             <ul class="nav flex-column">
               <li
                   class="nav-item mb-2"
@@ -92,11 +92,11 @@ export default {
   name: "main-footer",
   data() {
     return {
-      logoUrl: require("@/assets/logo.svg"),
+      logoUrl: require("@/assets/logo.png"),
       menuLinks: [
-        this.$t("city"),
-        this.$t("schedule.otherSchedule"),
-        this.$t("review"),
+        this.$t("menu.city"),
+        this.$t("menu.otherSchedule"),
+        this.$t("menu.review"),
         this.$t("login.signUp"),
       ],
       customerCenterLinks: [
