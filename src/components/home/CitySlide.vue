@@ -1,16 +1,29 @@
 <template>
-  <Carousel  :autoplay="5000" :itemsToShow="1.65" :wrapAround="true">
+  <Carousel :autoplay="5000" :itemsToShow="1.65" :wrapAround="true">
     <Slide v-for="data in this.girdInfos.data" :key="data.name">
-      <div class="card carousel__item" >
-        <img :src="require('@/assets/intro/' + data.image)" class="card-img-top" alt="...">
+      <div class="card carousel__item">
+        <img
+          :src="require('@/assets/intro/' + data.image)"
+          class="card-img-top"
+          alt="..."
+        />
         <div class="card-body">
           <figure>
-            <h5 class="card-title">{{ $t("city.name."+data.name) }}</h5>
+            <h5 class="card-title">{{ $t("city.name." + data.name) }}</h5>
             <blockquote class="blockquote card-text">
-              <p><i class="bi bi-thermometer"></i> : {{ data.averageDegree }}&#8451; |  <i class="bi bi-truck"></i> : {{ data.transportScore }}</p>
+              <p>
+                <i class="bi bi-thermometer"></i> :
+                {{ data.averageDegree }}&#8451; | <i class="bi bi-truck"></i> :
+                {{ data.transportScore }}
+              </p>
             </blockquote>
             <figcaption class="blockquote-footer">
-              자세한 정보가 궁금하시다면, <cite title="Source Title"><router-link to="#!">{{ $t("city.name."+data.name) }}</router-link></cite>
+              자세한 정보가 궁금하시다면,
+              <cite title="Source Title"
+                ><router-link to="#!">{{
+                  $t("city.name." + data.name)
+                }}</router-link></cite
+              >
             </figcaption>
           </figure>
         </div>
@@ -20,8 +33,8 @@
 </template>
 
 <script>
-import {defineComponent} from "vue";
-import {Carousel,  Slide} from "vue3-carousel";
+import { defineComponent } from "vue";
+import { Carousel, Slide } from "vue3-carousel";
 
 import "vue3-carousel/dist/carousel.css";
 
@@ -30,7 +43,6 @@ export default defineComponent({
   components: {
     Carousel,
     Slide,
-
   },
   data() {
     return {
@@ -64,6 +76,6 @@ export default defineComponent({
   transform: scale(0.8) translate(10px);
 }
 .carousel__slide--active > .carousel__item {
-  transform: scale(1.0);
+  transform: scale(1);
 }
 </style>

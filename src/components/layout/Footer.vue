@@ -4,14 +4,12 @@
     <footer class="py-5">
       <div class="container">
         <div class="row">
-          <div class="col-3">
-            <div class="align-content-center">
-              <div class="fs-1">
-                <a href="#" c>
-                  <img alt="logo" :src="logoUrl"/>
-                </a>
-              </div>
-              <p>{{ $t("footer.info") }}</p>
+          <div class="col-md-3">
+            <div class="fs-2">
+              <router-link tag="a" to="/" class="align-content-md-center">
+                <img alt="logo" :src="logoUrl"/>
+              </router-link>
+              <p class="mt-3">{{ $t("footer.info") }}</p>
             </div>
           </div>
           <div class="col-2">
@@ -34,7 +32,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-3 offset-1">
+          <div class="col-4">
             <form>
               <h5>{{ $t("footer.menu.news.letter") }}</h5>
               <p>{{ $t("footer.menu.news.info") }}</p>
@@ -48,7 +46,7 @@
                     class="form-control"
                     placeholder="Email address"
                 />
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-outline-dark w-50" type="button">
                   {{ $t("footer.menu.news.subscribe") }}
                 </button>
               </div>
