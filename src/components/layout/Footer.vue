@@ -1,7 +1,6 @@
 <template>
-  <div class="b-example-divider"></div>
   <div class="container">
-    <footer class="py-5">
+    <footer class="pt-5">
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -12,6 +11,7 @@
               <p class="mt-3">{{ $t("footer.info") }}</p>
             </div>
           </div>
+
           <div class="col-2">
             <h5>{{ $t("footer.menu.link") }}</h5>
             <ul class="nav flex-column">
@@ -90,7 +90,7 @@ export default {
   name: "main-footer",
   data() {
     return {
-      logoUrl: require("@/assets/logo.png"),
+      logoUrl: require("@/assets/img/logo.png"),
       menuLinks: [
         this.$t("menu.city"),
         this.$t("menu.otherSchedule"),

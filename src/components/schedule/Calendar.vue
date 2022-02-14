@@ -1,148 +1,125 @@
 <template>
   <div class="text-center section">
+    <h2 class="h2">Custom Calendars</h2>
+    <p class="text-lg font-medium text-gray-600 mb-6">
+      Roll your own calendars using scoped slots
+    </p>
     <v-calendar
         class="custom-calendar max-w-full"
         :masks="masks"
         :attributes="attributes"
         disable-page-swipe
+        is-expanded
     >
-      <day-content v-slot="{ day:day, attributes }"></day-content>
-      <div slot="day-content"
-          v-on="dayEvents"
-          @click="dayClick"
-          slot-scope="{ day, attributes }"
-          class="flex flex-col h-full z-10 overflow-hidden"
-          :class="day.year"
-      >
-        <span
-            class="day-label text-sm text-gray-900"
-            :class="[day.dateTime === today ? 'today rounded-sm' : '' ]"
-        >{{ day.day }}</span>
-        <div class="flex-grow overflow-y-scroll overflow-x-auto">
-          <p
-              v-for="attr in attributes"
-              :key="attr.key"
-              class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
-              :class="attr.customData.class"
-          >{{ attr.customData.title }}</p>
+      <template v-slot:day-content="{ day, attributes }">
+        <div class="flex flex-col h-full z-10 overflow-hidden">
+          <span class="day-label text-sm text-gray-900">{{ day.day }}</span>
+          <div class="flex-grow overflow-y-scroll overflow-x-auto">
+            <p
+                v-for="attr in attributes"
+                :key="attr.key"
+                class="text-xs leading-tight rounded-sm p-1 mt-0 mb-1"
+                :class="attr.customData.class"
+            >
+              {{ attr.customData.title }}
+            </p>
+          </div>
         </div>
-      </div>
+      </template>
     </v-calendar>
   </div>
 </template>
 
 <script>
+import 'v-calendar/dist/style.css';
+
 export default {
-  name: "home",
   data() {
-    const now = new Date();
-    const month = now.getMonth();
-    const year = now.getFullYear();
-    const day = now.getDate();
+    const month = new Date().getMonth();
+    const year = new Date().getFullYear();
     return {
-      today: new Date(year, month, day) * 1,
       masks: {
-        weekdays: "WWW"
+        weekdays: 'WWW',
       },
       attributes: [
         {
           key: 1,
           customData: {
-            title: "Lunch with mom.",
-            class: "bg-red-600 text-white"
+            title: 'Lunch with mom.',
+            class: 'bg-red-600 text-white',
           },
-          dates: new Date(year, month, 1)
+          dates: new Date(year, month, 1),
         },
         {
           key: 2,
           customData: {
-            title: "Take Noah to basketball practice",
-            class: "bg-blue-500 text-white"
+            title: 'Take Noah to basketball practice',
+            class: 'bg-blue-500 text-white',
           },
-          dates: new Date(year, month, 2)
+          dates: new Date(year, month, 2),
         },
         {
           key: 3,
           customData: {
             title: "Noah's basketball game.",
-            class: "bg-blue-500 text-white"
+            class: 'bg-blue-500 text-white',
           },
-          dates: new Date(year, month, 5)
+          dates: new Date(year, month, 5),
         },
         {
           key: 4,
           customData: {
-            title: "Take car to the shop",
-            class: "bg-indigo-500 text-white"
+            title: 'Take car to the shop',
+            class: 'bg-indigo-500 text-white',
           },
-          dates: new Date(year, month, 5)
+          dates: new Date(year, month, 5),
         },
         {
           key: 4,
           customData: {
-            title: "Meeting with new client.",
-            class: "bg-teal-500 text-white"
+            title: 'Meeting with new client.',
+            class: 'bg-teal-500 text-white',
           },
-          dates: new Date(year, month, 7)
+          dates: new Date(year, month, 7),
         },
         {
           key: 5,
           customData: {
             title: "Mia's gymnastics practice.",
-            class: "bg-pink-500 text-white"
+            class: 'bg-pink-500 text-white',
           },
-          dates: new Date(year, month, 11)
+          dates: new Date(year, month, 11),
         },
         {
           key: 6,
           customData: {
-            title: "Cookout with friends.",
-            class: "bg-orange-500 text-white"
+            title: 'Cookout with friends.',
+            class: 'bg-orange-500 text-white',
           },
-          dates: {months: 5, ordinalWeekdays: {2: 1}}
+          dates: {months: 5, ordinalWeekdays: {2: 1}},
         },
         {
           key: 7,
           customData: {
             title: "Mia's gymnastics recital.",
-            class: "bg-pink-500 text-white"
+            class: 'bg-pink-500 text-white',
           },
-          dates: new Date(year, month, 22)
+          dates: new Date(year, month, 22),
         },
         {
           key: 8,
           customData: {
-            title: "Visit great grandma.",
-            class: "bg-red-600 text-white"
+            title: 'Visit great grandma.',
+            class: 'bg-red-600 text-white',
           },
-          dates: new Date(year, month, 25)
+          dates: new Date(year, month, 25),
         },
-        {
-          key: "today",
-          customData: {
-            title: "Visit great grandma.",
-            class: "bg-red-600 text-white"
-          },
-          dates: new Date()
-        }
       ],
-      dayEvents: {
-        click: a => {
-          // eslint-disable-next-line no-console
-          console.log("dayEvents:", a);
-        }
-      }
     };
   },
-  methods: {
-    dayClick(a) {
-      // eslint-disable-next-line no-console
-      console.log("origin DOM click", a);
-    }
-  }
 };
 </script>
-<style scoped>
+<style>
 .flex-col {
   flex-direction: column;
 }
@@ -214,15 +191,15 @@ export default {
   width: auto;
 }
 
+.custom-calendar.vc-container .vc-header {
+  background-color: #f1f5f8;
+  padding: 10px 0;
+}
+
 .custom-calendar.vc-container .vc-weeks {
   padding: 0;
   height: 80vh;
   grid-template-rows: 33px repeat(6, 1fr);
-}
-
-.custom-calendar.vc-container .vc-header {
-  background-color: #f1f5f8;
-  padding: 10px 0;
 }
 
 .custom-calendar.vc-container .vc-weekday {
@@ -230,23 +207,6 @@ export default {
   border-bottom: var(--weekday-border);
   border-top: var(--weekday-border);
   padding: 5px 0;
-}
-
-.vc-border {
-  border-width: 1px;
-}
-
-.custom-calendar.vc-container .vc-day:not(.on-right) {
-  border-right: var(--day-border);
-}
-
-.custom-calendar.vc-container .vc-day:not(.on-bottom) {
-  border-bottom: var(--day-border);
-}
-
-.custom-calendar.vc-container .vc-day.weekday-1,
-.custom-calendar.vc-container .vc-day.weekday-7 {
-  background-color: #eff8ff;
 }
 
 .custom-calendar.vc-container .vc-day {
@@ -257,9 +217,30 @@ export default {
   background-color: #fff;
 }
 
+.custom-calendar.vc-container .vc-day.weekday-1,
+.custom-calendar.vc-container .vc-day.weekday-7 {
+  background-color: #eff8ff;
+}
+
+.custom-calendar.vc-container .vc-day:not(.on-bottom) {
+  border-bottom: var(--day-border);
+}
+
+/*.custom-calendar.vc-container .vc-day:not(.on-bottom).weekday-1 {*/
+/*  border-bottom: var(--day-border-highlight);*/
+/*}*/
+
+.custom-calendar.vc-container .vc-day:not(.on-right) {
+  border-right: var(--day-border);
+}
+
+.vc-border {
+  border-width: 1px;
+}
+
 .vc-day {
   position: relative;
-  /*min-height: var(--day-min-height);*/
+  min-height: var(--day-height);
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -267,9 +248,6 @@ export default {
 
 .text-center {
   text-align: center;
-}
-
-.section {
 }
 
 .max-w-full {

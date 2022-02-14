@@ -15,9 +15,6 @@
             </div>
           </div>
         </div>
-        <div class="canvas-open">
-          <span class="icon_menu"></span>
-        </div>
       </div>
     </div>
 
@@ -26,7 +23,7 @@
         <div class="row">
           <div class="col-lg-9">
             <nav class="nav-menu">
-              <ul>
+              <ul class="mb-0">
                 <li>
                   <router-link tag="a" to="/city?menu=SE">{{ $t("menu.city") }}</router-link>
                   <ul class="dropdown">
@@ -76,6 +73,7 @@ export default {
   name: "main-header",
   data() {
     return {
+      logoUrl: require("@/assets/img/logo.png"),
       cityMenus: [
         this.$t("city.name.SE"),
         this.$t("city.name.GN"),
@@ -93,8 +91,7 @@ export default {
         this.$t("customerCenter.personalTerms"),
         this.$t("customerCenter.termsAndConditions"),
         this.$t("customerCenter.notice"),
-      ],
-      logoUrl: require("@/assets/logo.png")
+      ]
     };
   },
 };

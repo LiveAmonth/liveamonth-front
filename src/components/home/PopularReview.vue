@@ -1,62 +1,34 @@
 <template>
-  <div class="mb-0">
-    <div class="card h-100">
-      <div class="card-body">
-        <h2 class="card-title">Card One</h2>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem
-          magni quas ex numquam, maxime minus quam molestias corporis
-          quod, ea minima accusamus.
-        </p>
-      </div>
-      <div class="card-footer">
-        <a class="btn btn-primary btn-sm" href="#!">More Info</a>
-      </div>
-    </div>
-  </div>
+  <other-review-component>
+    <template v-slot:card-title>
+      @@@@@@@@@게시판!!
+    </template>
+    <template v-slot:card-preview>
+      1번 미리보기 내용입니다@@@@@@@@@@@@@@@@@@@
+    </template>
+  </other-review-component>
   <div class="b-example-divider"></div>
-
-  <div class="mb-0">
-    <div class="card h-100">
-      <div class="card-body">
-        <h2 class="card-title">Card One</h2>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem
-          magni quas ex numquam, maxime minus quam molestias corporis
-          quod, ea minima accusamus.
-        </p>
-      </div>
-      <div class="card-footer">
-        <a class="btn btn-primary btn-sm" href="#!">More Info</a>
-      </div>
-    </div>
-  </div>
+  <other-review-component>
+    <template v-slot:card-title>
+      @@@@@@@@@게시판!!
+    </template>
+    <template v-slot:card-preview>
+      2번 미리보기 내용입니다@@@@@@@@@@@@@@@@@@@
+    </template>
+  </other-review-component>
   <div class="b-example-divider"></div>
-
-
 </template>
 
 <script>
+import OtherReviewComponent from "@/components/review/OtherReviewComponent";
+
 export default {
-  name: '',
-  components: {},
+  name: "",
+  components: { OtherReviewComponent },
   data() {
-    return {
-      simpleData: ''
-    };
+    return {};
   },
-  setup() {
-  },
-  created() {
-  },
-  mounted() {
-  },
-  unmounted() {
-  },
-  methods: {}
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -3,7 +3,7 @@
     <Slide v-for="data in this.girdInfos.data" :key="data.name">
       <div class="card carousel__item">
         <img
-          :src="require('@/assets/intro/' + data.image)"
+          :src="require('@/assets/img/intro/' + data.image)"
           class="card-img-top"
           alt="..."
         />

@@ -133,8 +133,8 @@ ol {
 }
 
 .section-title.sidebar-title h5:after {
-    height: 36px;
-    top: -8px;
+    height: 30px;
+    top: -3px;
 }
 
 .section-title.sidebar-title-b {
@@ -176,6 +176,7 @@ ol {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
+
 }
 
 .spad {
@@ -303,6 +304,7 @@ ol {
 
 .hs-top .logo {
     padding-top: 10px;
+    margin-left: 20px;
     padding-bottom: 10px;
 }
 
@@ -2012,8 +2014,6 @@ ol {
 }
 
 .pd-text .pd-board .tab-board .nav-tabs .nav-item {
-
-
     margin-bottom: 0;
 }
 
