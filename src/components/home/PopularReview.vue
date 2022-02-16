@@ -1,22 +1,15 @@
 <template>
-  <other-review-component>
-    <template v-slot:card-title>
-      @@@@@@@@@게시판!!
-    </template>
-    <template v-slot:card-preview>
-      1번 미리보기 내용입니다@@@@@@@@@@@@@@@@@@@
-    </template>
-  </other-review-component>
-  <div class="b-example-divider"></div>
-  <other-review-component>
-    <template v-slot:card-title>
-      @@@@@@@@@게시판!!
-    </template>
-    <template v-slot:card-preview>
-      2번 미리보기 내용입니다@@@@@@@@@@@@@@@@@@@
-    </template>
-  </other-review-component>
-  <div class="b-example-divider"></div>
+  <div v-for="review in reviewList" :key="review">
+    <other-review-component>
+      <template v-slot:cardTitle>
+        {{ review.title }}
+      </template>
+      <template v-slot:cardPreview>
+        {{ review.previewContent }}
+      </template>
+    </other-review-component>
+    <div class="b-example-divider"></div>
+  </div>
 </template>
 
 <script>
@@ -24,11 +17,55 @@ import OtherReviewComponent from "@/components/review/OtherReviewComponent";
 
 export default {
   name: "",
-  components: { OtherReviewComponent },
+  components: {OtherReviewComponent},
   data() {
-    return {};
+    return {
+      reviewList: [
+        {
+          title: "1번 게시글 제목",
+          previewContent: "미리보기 내용 1",
+          cardInfo: {
+            imageUrl: require("@/assets/img/default.jpg"),
+            viewCount: 500,
+            likeCount: 200,
+            nickname: "홍길동",
+            gender: "M",
+            age: 29,
+            email: "kxuxeon@gmail.com"
+          },
+        },
+        {
+          title: "2번 게시글 제목",
+          previewContent: "미리보기 내용 2",
+          cardInfo: {
+            imageUrl: require("@/assets/img/default.jpg"),
+            viewCount: 400,
+            likeCount: 150,
+            nickname: "김영희",
+            gender: "F",
+            age: 24,
+            email: "young@gmail.com"
+          },
+        },
+        {
+          title: "3번 게시글 제목",
+          previewContent: "미리보기 내용 3",
+          cardInfo: {
+            imageUrl: require("@/assets/img/default.jpg"),
+            viewCount: 200,
+            likeCount: 100,
+            nickname: "김철수",
+            gender: "M",
+            age: 12,
+            email: "chulsoo@gmail.com"
+          },
+        },
+      ],
+    };
   },
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

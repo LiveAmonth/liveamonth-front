@@ -10,17 +10,7 @@ import VCalendar from "v-calendar";
 
 const app = createApp(App).use(i18n);
 app.config.globalProperties.t = i18n;
-app.use(VCalendar, {
-  componentPrefix: "v",
-  locales: {
-    "en-EN": {
-      firstDayOfWeek: 2,
-      masks: {
-        L: "YYYY-MM-DD",
-      },
-    },
-  },
-});
+app.use(VCalendar, {});
 app.use(store).use(router);
 app.mixin(mixins);
 app.mount("#app");

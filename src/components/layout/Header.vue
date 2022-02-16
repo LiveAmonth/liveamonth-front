@@ -10,8 +10,8 @@
           </div>
           <div class="col-lg-10">
             <div class="ht-widget pt-4">
-              <router-link tag="a" to="/" class="hw-btn">{{$t("login.signUp")}}</router-link>
-              <router-link tag="a" to="/" class="hw-btn">{{$t("login.signIn")}}</router-link>
+              <router-link tag="a" to="/sign-up" class="hw-btn">{{$t("login.signUp")}}</router-link>
+              <router-link tag="a" to="/login" class="hw-btn">{{$t("login.signIn")}}</router-link>
             </div>
           </div>
         </div>
@@ -69,11 +69,13 @@
 </template>
 
 <script>
+import {computed} from "vue";
+import {useStore} from "vuex";
+
 export default {
   name: "main-header",
   data() {
     return {
-      logoUrl: require("@/assets/img/logo.png"),
       cityMenus: [
         this.$t("city.name.SE"),
         this.$t("city.name.GN"),
@@ -94,7 +96,16 @@ export default {
       ]
     };
   },
+  setup() {
+    const store = useStore();
+    const logoUrl = computed(() => {
+      return store.state.logo;
+    });
+    return {logoUrl}
+  },
 };
 </script>
-<style>
+<style scoped>
+.hs-nav{
+}
 </style>

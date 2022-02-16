@@ -15,6 +15,7 @@
 import Header from "@/components/layout/Header.vue";
 import Footer from "@/components/layout/Footer.vue";
 import "@/assets/css/style.css";
+
 export default {
   name: "App",
   components: {
@@ -23,3 +24,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+#footer {
+  background-color: #2E4750;
+}
+</style>

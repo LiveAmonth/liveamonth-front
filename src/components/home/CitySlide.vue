@@ -1,11 +1,10 @@
 <template>
-  <Carousel :autoplay="5000" :itemsToShow="1.65" :wrapAround="true">
-    <Slide v-for="data in this.girdInfos.data" :key="data.name">
+  <Carousel :autoplay="3500" :itemsToShow="1.65" :wrapAround="true">
+    <Slide v-for="data in this.slideInfos.data" :key="data.name">
       <div class="card carousel__item">
         <img
           :src="require('@/assets/img/intro/' + data.image)"
           class="card-img-top"
-          alt="..."
         />
         <div class="card-body">
           <figure>
@@ -33,12 +32,11 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import { Carousel, Slide } from "vue3-carousel";
 
 import "vue3-carousel/dist/carousel.css";
 
-export default defineComponent({
+export default {
   name: "city-slide",
   components: {
     Carousel,
@@ -46,18 +44,18 @@ export default defineComponent({
   },
   data() {
     return {
-      girdInfos: [],
+      slideInfos: [],
     };
   },
   mounted() {
-    this.getGridInfos();
+    this.getSlideInfos();
   },
   methods: {
-    async getGridInfos() {
-      this.girdInfos = await this.$api("/v1/api/city/grid-infos", "get");
+    async getSlideInfos() {
+      this.slideInfos = await this.$api("/v1/api/city/slide-infos", "get");
     },
   },
-});
+};
 </script>
 <style scoped>
 .carousel__slide > .carousel__item {

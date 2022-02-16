@@ -71,7 +71,13 @@ export default {
     PopularSchedule,
     PopularReview,
   },
+  data(){
+    return{
+    }
+  }
 };
 </script>
 
-<style></style>
+<style >
+
+</style>

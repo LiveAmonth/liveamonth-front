@@ -7,6 +7,7 @@
     "signUp": "회원가입",
     "signIn": "로그인",
     "logout": "로그아웃",
+    "notMember": "아직 회원이 아니신가요?",
     "findId": "아이디 찾기",
     "findPw": "비밀번호 찾기",
     "loginId": "아이디",

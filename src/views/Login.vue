@@ -1,66 +1,75 @@
 <template>
-  <div class="login set-bg" v-bind:style="{ backgroundImage: 'url(' + this.backgroundUrl + ')' }">
+  <div
+    class="login set-bg"
+    v-bind:style="{ backgroundImage: 'url(' + backgroundUrl + ')' }"
+  >
     <section class="ftco-section login-section">
       <div class="container p-0 login-container">
         <div class="row justify-content-center pt-2 mb-5">
           <div class="col-md-10 text-center mt-3">
-            <a href="/"><img :src="logoUrl" alt=""/></a>
+            <a href="/"><img :src="logoUrl" alt="" /></a>
           </div>
         </div>
         <div class="row justify-content-center p-0">
           <div class="col-md-10">
-            <form role="form" action="/login" method="post">
+            <form class="form" @submit.prevent="handleSubmit">
               <!--              <div th:if="${#fields.hasGlobalErrors()}">-->
               <!--                <p class="field-error msg" th:each="err : ${#fields.globalErrors()}"-->
               <!--                   th:text="${err}">전체 오류 메시지</p>-->
               <!--              </div>-->
               <div class="form-group mt-3">
-                <label class="form-control-placeholder" for="userID"
-                >아이디</label
-                >
-                <input type="text" class="form-control" id="userID"/>
-                <div class="field-error msg"/>
+                <label class="form-control-placeholder" for="userId">{{
+                  $t("login.signIn")
+                }}</label>
+                <input
+                  id="userId"
+                  type="text"
+                  class="form-control"
+                  v-model="username"
+                />
+                <div class="field-error msg" />
               </div>
               <div class="form-group">
-                <label class="form-control-placeholder" for="password"
-                >비밀번호</label
-                >
-                <input type="password" id="password" class="form-control"/>
-                <span
-                    id="password-field"
-                    class="fa fa-fw fa-eye field-icon"
-                ></span>
-                <div class="field-error msg"/>
+                <label class="form-control-placeholder" for="password">{{
+                  $t("login.password")
+                }}</label>
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control"
+                  v-model="password"
+                />
+                <div class="field-error msg" />
               </div>
               <div class="form-group">
-                <button
-                    type="submit"
-                    class="form-control btn btn-primary rounded submit mt-3 px-3"
+                <button v-if="!isPending"
+                  class="form-control btn btn-primary rounded submit mt-3 px-3"
                 >
-                  로그인
+                  {{ $t("login.signIn") }}
+                </button>
+                <button v-if="isPending"
+                  class="form-control btn btn-primary rounded submit mt-3 px-3"
+                        disabled
+                >
+                  Loading
                 </button>
               </div>
             </form>
-            <div class="form-group d-md-flex">
-              <div class="w-50 text-left">
-                <label class="checkbox-wrap checkbox-primary mb-0"
-                >[[#{login.remember}]]
-                  <input type="checkbox" name="userCookie" checked/>
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="w-50 text-md-right">
-                <a href="/findId" class="underline-text">아이디 찾기</a>
-              </div>
 
-              <div class="w-50 text-md-right">
-                <a href="/findPw" class="underline-text">비밀번호 찾기</a>
-              </div>
-            </div>
+            <p class="text-lg-end col">
+              <router-link tag="a" to="/user/findId" class="mx-2">{{
+                $t("login.findId")
+              }}</router-link>
+              <router-link tag="a" to="/user/findPw">{{
+                $t("login.findPw")
+              }}</router-link>
+            </p>
 
             <p class="text-center">
-              아직 회원이 아니신가요?
-              <a href="/user/signUp" class="underline-text">회원가입</a>
+              {{ $t("login.notMember") }}
+              <router-link tag="a" to="/user/signUp">{{
+                $t("login.signUp")
+              }}</router-link>
             </p>
           </div>
         </div>
@@ -70,37 +79,65 @@
 </template>
 
 <script>
-import axios from "axios";
-
+import useLogin from "@/composables/useLogin";
+import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   name: "",
   components: {},
   data() {
     return {
-      logoUrl: require("@/assets/img/logo.png"),
-      backgroundUrl: require("@/assets/img/login_background.jpg")
     };
   },
   setup() {
+    const{ error, login, isPending} = useLogin()
+    const store = new useStore()
+    const router = useRouter()
+
+    const username = ref('')
+    const password = ref('')
+
+    const handleSubmit = async () =>{
+      await login(username.value, password.value)
+      if(store.state.auth.status.loggedIn){
+        router.push({name:'Home'})
+      }
+    }
+    return {username, password, handleSubmit, error, isPending}
   },
-  created() {
+  created() {},
+  mounted() {},
+  methods: {
+    async login() {
+      let loginData = {};
+      loginData.userId = this.userId;
+      loginData.password = this.password;
+      console.log(loginData);
+      await this.axios.post("/v1/api/login", JSON.stringify(loginData))
+          .then((res) => {
+            if (res.status === 200) {
+              console.log(res.data);
+              this.$router.push({ path: "/about" });
+            }
+        }
+      );
+    },
   },
-  mounted() {
-  },
-  methods: {}
-,
-}
-;
+};
 </script>
 
 <style scoped>
+.login {
+  height: 900px;
+}
 .login-container {
   background: white;
-  width: 600px;
+  width: 30%;
   padding-top: 40%;
   box-shadow: rgba(19, 87, 98, 0.4) 5px 5px, rgba(19, 87, 98, 0.3) 10px 10px,
-  rgba(19, 87, 98, 0.2) 15px 15px, rgba(19, 87, 98, 0.1) 20px 20px,
-  rgba(19, 87, 98, 0.05) 25px 25px;
+    rgba(19, 87, 98, 0.2) 15px 15px, rgba(19, 87, 98, 0.1) 20px 20px,
+    rgba(19, 87, 98, 0.05) 25px 25px;
   border-radius: 10px;
 }
 
@@ -220,7 +257,11 @@ textarea.form-control {
   background: #fff1f1;
   color: #135762;
   box-shadow: inset -3px -3px 5px rgba(225, 225, 225, 0.5),
-  inset 8px 0px 16px rgba(0, 0, 0, 0.1);
+    inset 8px 0px 16px rgba(0, 0, 0, 0.1);
+}
+a,
+a:hover {
+  color: #135762;
 }
 
 .msg {
