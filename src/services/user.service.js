@@ -14,8 +14,9 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("token", JSON.stringify(response.data));
         }
+        return response.data;
       });
   }
 
@@ -24,10 +25,10 @@ class AuthService {
    */
   logout() {
     // LocalStorage 사용자 정보
-    let user = JSON.parse(localStorage.getItem("user"));
-
+    let token = JSON.parse(localStorage.getItem("token"));
     let data = {
-      username: user.username,
+      accessToken: token.accessToken,
+      refreshToken: token.refreshToken
     };
 
     return axios
@@ -38,7 +39,7 @@ class AuthService {
       })
       .then((response) => {
         console.log(response);
-        localStorage.removeItem("user");
+        localStorage.removeItem("token");
       });
   }
 }

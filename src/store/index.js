@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import {auth} from "./auth.module";
+import { auth } from "./auth.module";
 
 const store = createStore({
   state() {
@@ -7,7 +7,7 @@ const store = createStore({
       logo: require("@/assets/img/logo.png"),
       footerLogo: require("@/assets/img/logo_footer.png"),
       loginBackground: require("@/assets/img/login_background.jpg"),
-      defaultProfile: require('@/assets/img/default.jpg'),
+      defaultProfile: require("@/assets/img/default.jpg"),
       reviewList: [
         {
           title: "1번 게시글 제목",
@@ -19,7 +19,7 @@ const store = createStore({
             nickname: "홍길동",
             gender: "M",
             age: 29,
-            email: "kxuxeon@gmail.com"
+            email: "kxuxeon@gmail.com",
           },
         },
         {
@@ -32,7 +32,7 @@ const store = createStore({
             nickname: "김영희",
             gender: "F",
             age: 24,
-            email: "young@gmail.com"
+            email: "young@gmail.com",
           },
         },
         {
@@ -45,15 +45,15 @@ const store = createStore({
             nickname: "김철수",
             gender: "M",
             age: 12,
-            email: "chulsoo@gmail.com"
+            email: "chulsoo@gmail.com",
           },
         },
       ],
     };
   },
-  modules:{
+  modules: {
     auth,
-  }
+  },
 });
 
 export default store;

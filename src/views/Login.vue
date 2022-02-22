@@ -59,19 +59,19 @@
             </form>
 
             <p class="text-lg-end col">
-              <router-link tag="a" to="/user/findId" class="mx-2">{{
-                $t("login.findId")
-              }}</router-link>
-              <router-link tag="a" to="/user/findPw">{{
-                $t("login.findPw")
-              }}</router-link>
+              <router-link tag="a" to="/user/findId" class="mx-2"
+                >{{ $t("login.findId") }}
+              </router-link>
+              <router-link tag="a" to="/user/findPw"
+                >{{ $t("login.findPw") }}
+              </router-link>
             </p>
 
             <p class="text-center">
               {{ $t("login.notMember") }}
-              <router-link tag="a" to="/user/signUp">{{
-                $t("login.signUp")
-              }}</router-link>
+              <router-link tag="a" to="/user/signUp"
+                >{{ $t("login.signUp") }}
+              </router-link>
             </p>
           </div>
         </div>
@@ -85,6 +85,7 @@ import useLogin from "@/composables/useLogin";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+
 export default {
   name: "",
   components: {},
@@ -102,7 +103,7 @@ export default {
     const handleSubmit = async () => {
       await login(username.value, password.value);
       if (store.state.auth.status.loggedIn) {
-        router.push({ name: "Home" });
+        await router.push({ name: "Profile" });
       }
     };
 
@@ -147,6 +148,7 @@ export default {
 .login {
   height: 900px;
 }
+
 .login-container {
   background: white;
   width: 30%;
@@ -275,6 +277,7 @@ textarea.form-control {
   box-shadow: inset -3px -3px 5px rgba(225, 225, 225, 0.5),
     inset 8px 0px 16px rgba(0, 0, 0, 0.1);
 }
+
 a,
 a:hover {
   color: #135762;
