@@ -42,14 +42,16 @@
                 <div class="field-error msg" />
               </div>
               <div class="form-group">
-                <button v-if="!isPending"
+                <button
+                  v-if="!isPending"
                   class="form-control btn btn-primary rounded submit mt-3 px-3"
                 >
                   {{ $t("login.signIn") }}
                 </button>
-                <button v-if="isPending"
+                <button
+                  v-if="isPending"
                   class="form-control btn btn-primary rounded submit mt-3 px-3"
-                        disabled
+                  disabled
                 >
                   Loading
                 </button>
@@ -80,31 +82,45 @@
 
 <script>
 import useLogin from "@/composables/useLogin";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 export default {
   name: "",
   components: {},
   data() {
-    return {
-    };
+    return {};
   },
   setup() {
-    const{ error, login, isPending} = useLogin()
-    const store = new useStore()
-    const router = useRouter()
+    const { error, login, isPending } = useLogin();
+    const store = new useStore();
+    const router = useRouter();
 
-    const username = ref('')
-    const password = ref('')
+    const username = ref("");
+    const password = ref("");
 
-    const handleSubmit = async () =>{
-      await login(username.value, password.value)
-      if(store.state.auth.status.loggedIn){
-        router.push({name:'Home'})
+    const handleSubmit = async () => {
+      await login(username.value, password.value);
+      if (store.state.auth.status.loggedIn) {
+        router.push({ name: "Home" });
       }
-    }
-    return {username, password, handleSubmit, error, isPending}
+    };
+
+    const backgroundUrl = computed(() => {
+      return store.state.loginBackground;
+    });
+    const logoUrl = computed(() => {
+      return store.state.logo;
+    });
+    return {
+      backgroundUrl,
+      logoUrl,
+      username,
+      password,
+      handleSubmit,
+      error,
+      isPending,
+    };
   },
   created() {},
   mounted() {},
@@ -114,14 +130,14 @@ export default {
       loginData.userId = this.userId;
       loginData.password = this.password;
       console.log(loginData);
-      await this.axios.post("/v1/api/login", JSON.stringify(loginData))
-          .then((res) => {
-            if (res.status === 200) {
-              console.log(res.data);
-              this.$router.push({ path: "/about" });
-            }
-        }
-      );
+      await this.axios
+        .post("/v1/api/login", JSON.stringify(loginData))
+        .then((res) => {
+          if (res.status === 200) {
+            console.log(res.data);
+            this.$router.push({ path: "/about" });
+          }
+        });
     },
   },
 };

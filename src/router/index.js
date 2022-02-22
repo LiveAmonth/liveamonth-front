@@ -22,6 +22,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/findId",
+    name: "FindId",
+    component: () => import("../views/FindId.vue"),
+  },
 ];
 
 const router = createRouter({
