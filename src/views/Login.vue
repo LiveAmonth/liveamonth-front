@@ -18,11 +18,11 @@
               <!--                   th:text="${err}">전체 오류 메시지</p>-->
               <!--              </div>-->
               <div class="form-group mt-3">
-                <label class="form-control-placeholder" for="userId">{{
+                <label class="form-control-placeholder" for="loginId">{{
                   $t("login.signIn")
                 }}</label>
                 <input
-                  id="userId"
+                  id="loginId"
                   type="text"
                   class="form-control"
                   v-model="username"
@@ -59,17 +59,17 @@
             </form>
 
             <p class="text-lg-end col">
-              <router-link tag="a" to="/user/findId" class="mx-2"
+              <router-link tag="a" to="/find-id" class="mx-2"
                 >{{ $t("login.findId") }}
               </router-link>
-              <router-link tag="a" to="/user/findPw"
+              <router-link tag="a" to="/find-pw"
                 >{{ $t("login.findPw") }}
               </router-link>
             </p>
 
             <p class="text-center">
               {{ $t("login.notMember") }}
-              <router-link tag="a" to="/user/signUp"
+              <router-link tag="a" to="/sign-up"
                 >{{ $t("login.signUp") }}
               </router-link>
             </p>
@@ -103,7 +103,7 @@ export default {
     const handleSubmit = async () => {
       await login(username.value, password.value);
       if (store.state.auth.status.loggedIn) {
-        await router.push({ name: "Profile" });
+        await router.push({ name: "Home" });
       }
     };
 
@@ -126,20 +126,21 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    async login() {
-      let loginData = {};
-      loginData.userId = this.userId;
-      loginData.password = this.password;
-      console.log(loginData);
-      await this.axios
-        .post("/v1/api/login", JSON.stringify(loginData))
-        .then((res) => {
-          if (res.status === 200) {
-            console.log(res.data);
-            this.$router.push({ path: "/about" });
-          }
-        });
-    },
+    /*async login() {*/
+    /*  let loginData = {};*/
+    /*  loginData.userId = this.userId;*/
+    //   loginData.password = this.password;
+    //   console.log(loginData);
+    //   await this.axios
+    //     .post("/v1/api/auth/login", JSON.stringify(loginData), {
+    //       headers: { "content-type": "application/json" },
+    //     })
+    //     .then((res) => {
+    //       if (res.status === 200) {
+    //         console.log(res.data);
+    //       }
+    //     });
+    // },
   },
 };
 </script>

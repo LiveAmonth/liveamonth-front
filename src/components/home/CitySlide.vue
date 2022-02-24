@@ -1,6 +1,6 @@
 <template>
   <Carousel :autoplay="3500" :itemsToShow="1.65" :wrapAround="true">
-    <Slide v-for="data in this.slideInfos.data" :key="data.name">
+    <Slide v-for="data in slideInfos" :key="data">
       <div class="card carousel__item">
         <img
           :src="require('@/assets/img/intro/' + data.image)"
@@ -18,11 +18,11 @@
             </blockquote>
             <figcaption class="blockquote-footer">
               자세한 정보가 궁금하시다면,
-              <cite title="Source Title"
-                ><router-link to="#!">{{
-                  $t("city.name." + data.name)
-                }}</router-link></cite
-              >
+              <cite title="Source Title">
+                <router-link to="#!"
+                  >{{ $t("city.name." + data.name) }}
+                </router-link>
+              </cite>
             </figcaption>
           </figure>
         </div>
@@ -35,6 +35,8 @@
 import { Carousel, Slide } from "vue3-carousel";
 
 import "vue3-carousel/dist/carousel.css";
+import { computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "city-slide",
@@ -43,17 +45,23 @@ export default {
     Slide,
   },
   data() {
-    return {
-      slideInfos: [],
-    };
+    return {};
+  },
+  setup() {
+    const store = new useStore();
+
+    const slideInfos = computed(() => {
+      return store.state.home.slideInfos;
+    });
+    return { slideInfos };
   },
   mounted() {
-    this.getSlideInfos();
+    // this.getSlideInfos();
   },
   methods: {
-    async getSlideInfos() {
-      this.slideInfos = await this.$api("/v1/api/city/slide-infos", "get");
-    },
+    // async getSlideInfos() {
+    //   this.slideInfos = await this.$api("/v1/api/city/slide-infos", "get");
+    // },
   },
 };
 </script>
@@ -63,16 +71,20 @@ export default {
   opacity: 0.5;
   transition: 0.5s;
 }
+
 .carousel__slide--visible > .carousel__item {
   opacity: 1;
   transform: rotateY(0);
 }
+
 .carousel__slide--next > .carousel__item {
   transform: scale(0.8) translate(-10px);
 }
+
 .carousel__slide--prev > .carousel__item {
   transform: scale(0.8) translate(10px);
 }
+
 .carousel__slide--active > .carousel__item {
   transform: scale(1);
 }

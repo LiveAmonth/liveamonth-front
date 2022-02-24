@@ -1,5 +1,4 @@
 import AuthService from "../services/user.service";
-
 /**
  * 1. Server API 호출
  * 2. Response로 사용자정보(토큰)를 받음
@@ -18,9 +17,9 @@ export const auth = {
   actions: {
     login({ commit }, { username, password }) {
       return AuthService.login(username, password).then(
-        (token) => {
-          commit("loginSuccess", token);
-          return Promise.resolve(token);
+        (user) => {
+          commit("loginSuccess", user);
+          return Promise.resolve(user);
         },
         (error) => {
           commit("loginFailure");
@@ -43,7 +42,7 @@ export const auth = {
       state.user = null;
     },
     logout(state) {
-      this.state.status.loggedIn = false;
+      state.status.loggedIn = false;
       state.user = null;
     },
   },
