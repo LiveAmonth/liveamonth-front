@@ -126,21 +126,6 @@ export default {
   created() {},
   mounted() {},
   methods: {
-    /*async login() {*/
-    /*  let loginData = {};*/
-    /*  loginData.userId = this.userId;*/
-    //   loginData.password = this.password;
-    //   console.log(loginData);
-    //   await this.axios
-    //     .post("/v1/api/auth/login", JSON.stringify(loginData), {
-    //       headers: { "content-type": "application/json" },
-    //     })
-    //     .then((res) => {
-    //       if (res.status === 200) {
-    //         console.log(res.data);
-    //       }
-    //     });
-    // },
   },
 };
 </script>

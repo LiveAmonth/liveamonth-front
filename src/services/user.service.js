@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/";
+const API_URL = "http://localhost:8080";
 const configHeaders = {
   "content-type": "application/json; charset=utf-8",
 };
@@ -16,7 +16,7 @@ class AuthService {
       password: password,
     };
     return axios
-      .post(API_URL + "v1/api/auth/login", JSON.stringify(request), {
+      .post(API_URL + "/v1/api/auth/login", JSON.stringify(request), {
         headers: configHeaders,
       })
       .then((response) => {
@@ -42,7 +42,7 @@ class AuthService {
     };
 
     return axios
-      .post(API_URL + "v1/api/auth/logout", JSON.stringify(data), {
+      .post(API_URL + "/v1/api/auth/logout", JSON.stringify(data), {
         headers: configHeaders,
       })
       .then((response) => {

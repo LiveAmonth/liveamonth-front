@@ -11,7 +11,7 @@
             </div>
           </div>
           <div class="col-lg-10">
-            <div class="ht-widget pt-4" v-if="loggedIn == false">
+            <div class="ht-widget pt-4" v-if="!loggedIn">
               <router-link tag="a" to="/login" class="hw-btn"
                 >{{ $t("login.signIn") }}
               </router-link>
@@ -19,7 +19,7 @@
                 >{{ $t("login.signUp") }}
               </router-link>
             </div>
-            <div class="ht-widget pt-4" v-if="loggedIn == true">
+            <div class="ht-widget pt-4" v-else>
               <a type="button" @click="logout" class="hw-btn">
                 {{ $t("login.logout") }}
               </a>

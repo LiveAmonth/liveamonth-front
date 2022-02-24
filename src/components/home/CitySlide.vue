@@ -1,6 +1,6 @@
 <template>
   <Carousel :autoplay="3500" :itemsToShow="1.65" :wrapAround="true">
-    <Slide v-for="data in slideInfos" :key="data">
+    <Slide v-for="data in this.slideInfos" :key="data">
       <div class="card carousel__item">
         <img
           :src="require('@/assets/img/intro/' + data.image)"
@@ -20,7 +20,7 @@
               자세한 정보가 궁금하시다면,
               <cite title="Source Title">
                 <router-link to="#!"
-                  >{{ $t("city.name." + data.name) }}
+                >{{ $t("city.name." + data.name) }}
                 </router-link>
               </cite>
             </figcaption>
@@ -35,33 +35,26 @@
 import { Carousel, Slide } from "vue3-carousel";
 
 import "vue3-carousel/dist/carousel.css";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 
 export default {
   name: "city-slide",
   components: {
     Carousel,
-    Slide,
-  },
-  data() {
-    return {};
+    Slide
   },
   setup() {
     const store = new useStore();
-
+    onMounted(async () => {
+      if (!store.state.home.status.isData) {
+        await store.dispatch("home/getSlideInfos");
+      }
+    });
     const slideInfos = computed(() => {
       return store.state.home.slideInfos;
     });
     return { slideInfos };
-  },
-  mounted() {
-    // this.getSlideInfos();
-  },
-  methods: {
-    // async getSlideInfos() {
-    //   this.slideInfos = await this.$api("/v1/api/city/slide-infos", "get");
-    // },
   },
 };
 </script>
