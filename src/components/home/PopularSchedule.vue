@@ -22,14 +22,24 @@
 <script>
 import 'v-calendar/dist/style.css';
 import OtherScheduleComponent from "@/components/schedule/OtherScheduleComponent";
+import { useStore } from "vuex";
+import { computed, onMounted } from "vue";
 
 export default {
-  name: "",
   components: {
     OtherScheduleComponent,
   },
-  data() {
-    return {};
+  setup() {
+    const store = new useStore();
+    onMounted(async () => {
+      if (store.state.home.topSchedules == null) {
+        await store.dispatch("home/getTopSchedules");
+      }
+    });
+    const topSchedules = computed(() => {
+      return store.state.home.topSchedules;
+    });
+    return { topSchedules };
   },
 };
 </script>

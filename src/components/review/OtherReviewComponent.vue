@@ -4,7 +4,8 @@
       <div class="row g-0 pt-4">
         <div class="col-md-6">
           <div class="card-body">
-            <UserProfileCard/>
+            <slot name="card">
+            </slot>
           </div>
         </div>
         <div class="col-md-5">
@@ -20,8 +21,7 @@
           </div>
         </div>
         <div class="card-footer text-center">
-          <router-link tag="a" class="btn btn-primary btn-sm" to="#!"
-          >해당 게시글 더보기
+          <router-link tag="a" class="btn btn-primary btn-sm" to="#!">해당 게시글 더보기
           </router-link>
         </div>
       </div>
@@ -29,16 +29,14 @@
   </div>
 </template>
 <script>
-import UserProfileCard from "@/components/UserProfileCard";
 
 export default {
   name: "",
   components: {
-    UserProfileCard,
   },
   data() {
     return {};
-  },
+  }
 };
 </script>
 

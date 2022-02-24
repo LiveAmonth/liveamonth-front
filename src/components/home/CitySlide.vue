@@ -47,7 +47,7 @@ export default {
   setup() {
     const store = new useStore();
     onMounted(async () => {
-      if (!store.state.home.status.isData) {
+      if (store.state.home.slideInfos == null) {
         await store.dispatch("home/getSlideInfos");
       }
     });

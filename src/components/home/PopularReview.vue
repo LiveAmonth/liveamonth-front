@@ -1,11 +1,14 @@
 <template>
-  <div v-for="review in reviewList" :key="review">
-    <other-review-component>
+  <div v-for="(review,index) in topReviews" :key="index">
+    <other-review-component v-bind:idx="index">
+      <template v-slot:card>
+        <user-profile-card v-bind:card-info="review.member"></user-profile-card>
+      </template>
       <template v-slot:cardTitle>
         {{ review.title }}
       </template>
       <template v-slot:cardPreview>
-        {{ review.previewContent }}
+        {{ review.content }}
       </template>
     </other-review-component>
     <div class="b-example-divider"></div>
@@ -14,55 +17,27 @@
 
 <script>
 import OtherReviewComponent from "@/components/review/OtherReviewComponent";
+import UserProfileCard from "@/components/UserProfileCard";
+import { useStore } from "vuex";
+import { computed, onMounted } from "vue";
 
 export default {
-  name: "",
-  components: {OtherReviewComponent},
-  data() {
-    return {
-      reviewList: [
-        {
-          title: "1번 게시글 제목",
-          previewContent: "미리보기 내용 1",
-          cardInfo: {
-            imageUrl: require("@/assets/img/default.jpg"),
-            viewCount: 500,
-            likeCount: 200,
-            nickname: "홍길동",
-            gender: "M",
-            age: 29,
-            email: "kxuxeon@gmail.com"
-          },
-        },
-        {
-          title: "2번 게시글 제목",
-          previewContent: "미리보기 내용 2",
-          cardInfo: {
-            imageUrl: require("@/assets/img/default.jpg"),
-            viewCount: 400,
-            likeCount: 150,
-            nickname: "김영희",
-            gender: "F",
-            age: 24,
-            email: "young@gmail.com"
-          },
-        },
-        {
-          title: "3번 게시글 제목",
-          previewContent: "미리보기 내용 3",
-          cardInfo: {
-            imageUrl: require("@/assets/img/default.jpg"),
-            viewCount: 200,
-            likeCount: 100,
-            nickname: "김철수",
-            gender: "M",
-            age: 12,
-            email: "chulsoo@gmail.com"
-          },
-        },
-      ],
-    };
+  components: {
+    OtherReviewComponent,
+    UserProfileCard
   },
+  setup() {
+    const store = new useStore();
+    onMounted(async () => {
+      if (store.state.home.topReviews == null) {
+        await store.dispatch("home/getTopReviews");
+      }
+    });
+    const topReviews = computed(() => {
+      return store.state.home.topReviews;
+    });
+    return { topReviews };
+  }
 };
 </script>
 
