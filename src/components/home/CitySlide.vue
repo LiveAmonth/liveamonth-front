@@ -20,7 +20,7 @@
               자세한 정보가 궁금하시다면,
               <cite title="Source Title">
                 <router-link to="#!"
-                >{{ $t("city.name." + data.name) }}
+                  >{{ $t("city.name." + data.name) }}
                 </router-link>
               </cite>
             </figcaption>
@@ -42,7 +42,7 @@ export default {
   name: "city-slide",
   components: {
     Carousel,
-    Slide
+    Slide,
   },
   setup() {
     const store = new useStore();
