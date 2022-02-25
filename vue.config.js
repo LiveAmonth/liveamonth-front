@@ -1,6 +1,9 @@
 const target = "http://localhost:8081";
 
+const path = require("path");
 module.exports = {
+  publicPath: process.env.BASE_URL,
+  assetsDir: process.env.BASE_URL,
   devServer: {
     port: 8080,
     proxy: {
@@ -9,6 +12,7 @@ module.exports = {
         changeOrigin: true,
       },
     },
+    contentBase: path.join(__dirname, ""), // 설정하면 url(/src/assets") 경로 사용 가능
   },
   css: {
     loaderOptions: {

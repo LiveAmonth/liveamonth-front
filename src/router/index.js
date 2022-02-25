@@ -14,14 +14,12 @@ const routes = [
     component: Login,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/city/:cityName",
+    name: "City",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  }
+      import(/* webpackChunkName: "about" */ "../views/City.vue"),
+    props: true,
+  },
 ];
 
 const router = createRouter({

@@ -25,7 +25,7 @@ class HomeService {
 
   }
   getTopSchedules() {
-    return axios.post(API_URL + "/v1/api/reviews/other",JSON.stringify(request),{ headers: configHeaders}).then((response) => {
+    return axios.post(API_URL + "/v1/api/schedules/other",JSON.stringify(request),{ headers: configHeaders}).then((response) => {
       localStorage.setItem("topSchedules", JSON.stringify(response.data.data));
       return response.data.data;
     }).catch((err) => {
