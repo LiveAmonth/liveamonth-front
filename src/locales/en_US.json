@@ -2,9 +2,9 @@
   "hello": {
     "name": "Hello! {user}"
   },
-  "login": {
+  "member": {
     "signUp": "SIGN UP",
-    "signIn": "SIGN IN",
+    "member": "SIGN IN",
     "logout": "Logout",
     "findId": "Find ID",
     "findPw": "Find PW",

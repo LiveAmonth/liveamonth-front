@@ -1,11 +1,18 @@
 {
   "message": "ASDASDASDASDASD",
   "hello": {
-    "name": "{user}님 안녕하세요."
+    "name": "{user}님 안녕하세요!"
   },
-  "login": {
+  "home": {
+    "popularContent": "인기 게시물",
+    "moreSchedule": "해당 스케줄 더보기",
+    "moreReview": "해당 게시글 더보기",
+    "title": "제목",
+    "profile": "프로필"
+  },
+  "member": {
     "signUp": "회원가입",
-    "signIn": "로그인",
+    "login": "로그인",
     "logout": "로그아웃",
     "notMember": "아직 회원이 아니신가요?",
     "findId": "아이디 찾기",
@@ -16,7 +23,11 @@
     "name": "이름",
     "nickname": "닉네임",
     "email": "이메일",
-    "genderTypes": "성별",
+    "gender": "성별",
+    "age": {
+      "start": "나이",
+      "end": "세"
+    },
     "birth": "생년월일"
   },
   "footer": {
@@ -38,11 +49,19 @@
     "mySchedule": "내 스케줄",
     "review": "후기 게시판",
     "myPage": "내 정보",
-    "customerCenter": "고객 센터"
+    "tCustomerCenter": "고객 센터",
+    "customerCenter": {
+      "faq": "자주 묻는 질문들",
+      "personalTerms": "개인정보 처리방침",
+      "termsAndConditions": "이용 약관",
+      "notice": "공지사항"
+    }
   },
   "city": {
     "info": {
-      "title": "'한달살기' 추천 도시"
+      "title": "'한달살기' 추천 도시",
+      "food": "먹거리",
+      "view": "볼거리"
     },
     "transport": {
       "grade": {
@@ -61,12 +80,12 @@
     },
     "tab": {
       "intro": "도시 소개",
-      "transport": "교통 정보",
+      "tTransport": "교통 정보",
       "transport": {
         "infoTitle": "정류장 및 노선 개수",
         "source": "출처 : 교통정보"
       },
-      "weather": "전년도 기온 정보",
+      "tWeather": "전년도 기온 정보",
       "weather": {
         "source": "출처 : 기상청 홈페이지",
         "infoTitle": "전년도 월 평균 기온",
@@ -83,11 +102,6 @@
       "YS": "여수",
       "JJ": "제주"
     }
-  },
-  "customerCenter": {
-    "faq": "자주 묻는 질문들",
-    "personalTerms": "개인정보 처리방침",
-    "termsAndConditions": "이용 약관",
-    "notice": "공지사항"
   }
+
 }

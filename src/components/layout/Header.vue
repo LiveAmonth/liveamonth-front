@@ -13,15 +13,19 @@
           <div class="col-lg-10">
             <div class="ht-widget pt-4" v-if="!loggedIn">
               <router-link tag="a" to="/login" class="hw-btn"
-                >{{ $t("login.signIn") }}
+                >{{ $t("member.login") }}
               </router-link>
               <router-link tag="a" to="/sign-up" class="hw-btn"
-                >{{ $t("login.signUp") }}
+                >{{ $t("member.signUp") }}
               </router-link>
             </div>
             <div class="ht-widget pt-4" v-else>
-              <a type="button" @click="logout" class="hw-btn">
-                {{ $t("login.logout") }}
+              <a
+                type="button"
+                @click="logout"
+                class="hw-btn text-decoration-none"
+              >
+                {{ $t("member.logout") }}
               </a>
             </div>
           </div>
@@ -36,12 +40,19 @@
             <nav class="nav-menu">
               <ul class="mb-0">
                 <li>
-                  <router-link tag="a" to="/city?menu=SE"
+                  <router-link
+                    tag="a"
+                    :to="{ name: 'City', params: { cityName: 'SE' } }"
                     >{{ $t("menu.city") }}
                   </router-link>
                   <ul class="dropdown">
-                    <li v-for="cityMenu in this.cityMenus" :key="cityMenu">
-                      <router-link tag="a" to="/">{{ cityMenu }}</router-link>
+                    <li v-for="cityMenu in cityMenus" :key="cityMenu">
+                      <router-link
+                        tag="a"
+                        :to="{ name: 'City', params: { cityName: cityMenu } }"
+                      >
+                        {{ $t("city.name." + cityMenu) }}
+                      </router-link>
                     </li>
                   </ul>
                 </li>
@@ -51,11 +62,11 @@
                   </router-link>
                   <ul class="dropdown">
                     <li
-                      v-for="scheduleMenu in this.scheduleMenus"
+                      v-for="scheduleMenu in scheduleMenus"
                       :key="scheduleMenu"
                     >
                       <router-link tag="a" to="/"
-                        >{{ scheduleMenu }}
+                        >{{ $t("menu." + scheduleMenu) }}
                       </router-link>
                     </li>
                   </ul>
@@ -72,15 +83,15 @@
                 </li>
                 <li>
                   <router-link tag="a" to="/"
-                    >{{ $t("menu.customerCenter") }}
+                    >{{ $t("menu.tCustomerCenter") }}
                   </router-link>
                   <ul class="dropdown">
                     <li
-                      v-for="customerCenterMenu in this.customerCenterMenus"
+                      v-for="customerCenterMenu in customerCenterMenus"
                       :key="customerCenterMenu"
                     >
                       <router-link tag="a" to="/"
-                        >{{ customerCenterMenu }}
+                        >{{ $t("menu.customerCenter." + customerCenterMenu) }}
                       </router-link>
                     </li>
                   </ul>
@@ -90,7 +101,9 @@
           </div>
           <div class="col-lg-3">
             <div class="hn-social">
-              <!--                        <p th:text="#{hello.name}" th:if="${user}"></p>-->
+              <p v-if="loggedIn">
+                {{ $t("hello.name", { user: loggedInName }) }}
+              </p>
             </div>
           </div>
         </div>
@@ -107,33 +120,25 @@ import { useRouter } from "vue-router";
 export default {
   name: "main-header",
   data() {
-    return {
-      cityMenus: [
-        this.$t("city.name.SE"),
-        this.$t("city.name.GN"),
-        this.$t("city.name.GJ"),
-        this.$t("city.name.BS"),
-        this.$t("city.name.YS"),
-        this.$t("city.name.JJ"),
-      ],
-      scheduleMenus: [
-        this.$t("menu.otherSchedule"),
-        this.$t("menu.mySchedule"),
-      ],
-      customerCenterMenus: [
-        this.$t("customerCenter.faq"),
-        this.$t("customerCenter.personalTerms"),
-        this.$t("customerCenter.termsAndConditions"),
-        this.$t("customerCenter.notice"),
-      ],
-    };
+    return {};
   },
   setup() {
     const router = useRouter();
     const store = useStore();
-
+    const cityMenus = computed(() => {
+      return store.state.cityMenus;
+    });
+    const customerCenterMenus = computed(() => {
+      return store.state.customerCenterMenus;
+    });
+    const scheduleMenus = computed(() => {
+      return store.state.scheduleMenus;
+    });
     const loggedIn = computed(() => {
       return store.state.auth.status.loggedIn;
+    });
+    const loggedInName = computed(() => {
+      return store.state.auth.user.name;
     });
     const logoUrl = computed(() => {
       return store.state.logo;
@@ -145,7 +150,15 @@ export default {
         await router.push({ name: "Home" });
       }
     };
-    return { logoUrl, loggedIn, logout };
+    return {
+      logoUrl,
+      cityMenus,
+      scheduleMenus,
+      customerCenterMenus,
+      loggedIn,
+      logout,
+      loggedInName,
+    };
   },
 };
 </script>

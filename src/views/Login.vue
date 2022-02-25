@@ -19,7 +19,7 @@
               <!--              </div>-->
               <div class="form-group mt-3">
                 <label class="form-control-placeholder" for="loginId">{{
-                  $t("login.signIn")
+                  $t("member.loginId")
                 }}</label>
                 <input
                   id="loginId"
@@ -31,7 +31,7 @@
               </div>
               <div class="form-group">
                 <label class="form-control-placeholder" for="password">{{
-                  $t("login.password")
+                  $t("member.password")
                 }}</label>
                 <input
                   id="password"
@@ -46,7 +46,7 @@
                   v-if="!isPending"
                   class="form-control btn btn-primary rounded submit mt-3 px-3"
                 >
-                  {{ $t("login.signIn") }}
+                  {{ $t("member.login") }}
                 </button>
                 <button
                   v-if="isPending"
@@ -60,17 +60,17 @@
 
             <p class="text-lg-end col">
               <router-link tag="a" to="/find-id" class="mx-2"
-                >{{ $t("login.findId") }}
+                >{{ $t("member.findId") }}
               </router-link>
               <router-link tag="a" to="/find-pw"
-                >{{ $t("login.findPw") }}
+                >{{ $t("member.findPw") }}
               </router-link>
             </p>
 
             <p class="text-center">
-              {{ $t("login.notMember") }}
+              {{ $t("member.notMember") }}
               <router-link tag="a" to="/sign-up"
-                >{{ $t("login.signUp") }}
+                >{{ $t("member.signUp") }}
               </router-link>
             </p>
           </div>
@@ -125,8 +125,7 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {
-  },
+  methods: {},
 };
 </script>
 

@@ -15,29 +15,29 @@
           <div class="col-2">
             <h5>{{ $t("footer.menu.link") }}</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2" v-for="link in menuLinks" :key="link">
+              <li class="nav-item mb-2" v-for="menu in footerMenus" :key="menu">
                 <router-link
                   tag="a"
                   to="/"
                   class="nav-li nk p-0 text-white-50"
-                  >{{ link }}</router-link
+                  >{{ $t("menu." + menu) }}</router-link
                 >
               </li>
             </ul>
           </div>
           <div class="col-2">
-            <h5>{{ $t("menu.customerCenter") }}</h5>
+            <h5>{{ $t("menu.tCustomerCenter") }}</h5>
             <ul class="nav flex-column">
               <li
                 class="nav-item mb-2"
-                v-for="link in customerCenterLinks"
-                :key="link"
+                v-for="menu in customerCenterMenus"
+                :key="menu"
               >
                 <router-link
                   tag="a"
                   to="/"
                   class="nav-link p-0 text-white-50"
-                  >{{ link }}</router-link
+                  >{{ $t("menu.customerCenter." + menu) }}</router-link
                 >
               </li>
             </ul>
@@ -79,27 +79,20 @@ import { computed } from "vue";
 export default {
   name: "main-footer",
   data() {
-    return {
-      menuLinks: [
-        this.$t("menu.city"),
-        this.$t("menu.otherSchedule"),
-        this.$t("menu.review"),
-        this.$t("login.signUp"),
-      ],
-      customerCenterLinks: [
-        this.$t("customerCenter.faq"),
-        this.$t("customerCenter.personalTerms"),
-        this.$t("customerCenter.termsAndConditions"),
-        this.$t("customerCenter.notice"),
-      ],
-    };
+    return {};
   },
   setup() {
     const store = useStore();
     const logoUrl = computed(() => {
       return store.state.footerLogo;
     });
-    return { logoUrl };
+    const customerCenterMenus = computed(() => {
+      return store.state.customerCenterMenus;
+    });
+    const footerMenus = computed(() => {
+      return store.state.footerMenus;
+    });
+    return { logoUrl, customerCenterMenus, footerMenus };
   },
 };
 </script>

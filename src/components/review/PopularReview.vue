@@ -1,13 +1,13 @@
 <template>
-  <div v-for="(review,index) in topReviews" :key="index">
-    <other-review-component v-bind:idx="index">
-      <template v-slot:card>
-        <user-profile-card v-bind:card-info="review.member"></user-profile-card>
+  <div v-for="(review, index) in topReviews" :key="index">
+    <other-review-component>
+      <template v-slot:profile-card>
+        <user-profile-slot v-bind="review.member"></user-profile-slot>
       </template>
-      <template v-slot:cardTitle>
+      <template v-slot:card-title>
         {{ review.title }}
       </template>
-      <template v-slot:cardPreview>
+      <template v-slot:card-preview>
         {{ review.content }}
       </template>
     </other-review-component>
@@ -17,14 +17,14 @@
 
 <script>
 import OtherReviewComponent from "@/components/review/OtherReviewComponent";
-import UserProfileCard from "@/components/UserProfileCard";
+import UserProfileSlot from "@/components/slot/UserProfileSlot";
 import { useStore } from "vuex";
 import { computed, onMounted } from "vue";
 
 export default {
   components: {
     OtherReviewComponent,
-    UserProfileCard
+    UserProfileSlot,
   },
   setup() {
     const store = new useStore();
@@ -37,10 +37,8 @@ export default {
       return store.state.home.topReviews;
     });
     return { topReviews };
-  }
+  },
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
