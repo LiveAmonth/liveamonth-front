@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "@/views/Login";
-
+import City from "@/views/City";
 const routes = [
   {
     path: "/",
@@ -16,8 +16,7 @@ const routes = [
   {
     path: "/city/:cityName",
     name: "City",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/City.vue"),
+    component: City,
     props: true,
   },
 ];

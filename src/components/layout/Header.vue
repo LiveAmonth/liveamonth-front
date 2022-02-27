@@ -49,7 +49,10 @@
                     <li v-for="cityMenu in cityMenus" :key="cityMenu">
                       <router-link
                         tag="a"
-                        :to="{ name: 'City', params: { cityName: cityMenu } }"
+                        :to="{
+                          name: 'City',
+                          params: { cityName: cityMenu },
+                        }"
                       >
                         {{ $t("city.name." + cityMenu) }}
                       </router-link>

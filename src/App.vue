@@ -1,12 +1,15 @@
 <template>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css"
+  />
   <div id="app">
     <div id="header">
-      <Header/>
+      <Header />
     </div>
-    <router-view/>
+    <router-view />
     <div id="footer">
-      <Footer/>
+      <Footer />
     </div>
   </div>
 </template>
@@ -26,6 +29,6 @@ export default {
 </script>
 <style scoped>
 #footer {
-  background-color: #2E4750;
+  background-color: #2e4750;
 }
 </style>

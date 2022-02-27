@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import { auth } from "./auth.module";
 import { home } from "./home.module";
+import { city } from "./city.module";
 // import createPersistedState from "vuex-persistedstate";
 
 const store = createStore({
@@ -24,6 +25,7 @@ const store = createStore({
   modules: {
     auth,
     home,
+    city,
   },
   // plugins: [
   //   createPersistedState({

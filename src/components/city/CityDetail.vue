@@ -1,22 +1,24 @@
 <template>
-  <div class="tab-desc">
-    <div class="row">
-      <div class="col-lg-4 col-md-6 mix">
-        <div
-          class="cityImg set-bg"
-          v-bind:style="{ 'background-image': 'url(' + image + ')' }"
-        >
-          <div class="label">{{ $t("city.name." + cityName) }}</div>
-        </div>
+  <div class="card">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img class="img-fluid rounded-start" :src="translateIntroImg.img" />
       </div>
-      <div class="col-lg-8">
-        <p class="cityText">{{ content }}</p>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ $t("city.name." + cityName) }}</h5>
+          <p class="card-text">
+            {{ content }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { computed, reactive } from "vue";
+
 export default {
   name: "city-detail",
   components: {},
@@ -26,14 +28,32 @@ export default {
     image: String,
   },
   data() {
-    return {};
+    return {
+      imagePath: "",
+    };
   },
-  setup() {},
+  setup(props) {
+    const state = reactive({
+      cityName: computed(() => props.cityName),
+      content: computed(() => props.content),
+      image: computed(() => props.image),
+    });
+    return { state };
+  },
   created() {},
-  mounted() {},
-  unmounted() {},
+  computed: {
+    translateIntroImg() {
+      return {
+        img: this.image && require(`@/assets/img/intro/${this.state.image}`),
+      };
+    },
+  },
   methods: {},
 };
 </script>
 
-<style></style>
+<style scoped>
+.card {
+  border: none;
+}
+</style>

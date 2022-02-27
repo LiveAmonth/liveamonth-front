@@ -83,7 +83,7 @@
                     aria-labelledby="nav-detail-tab"
                     role="tabpanel"
                   >
-                    <city-detail v-bind="totalCityInfos"></city-detail>
+                    <city-detail v-bind="state.totalCityInfos"></city-detail>
                   </div>
                 </template>
                 <template v-slot:tab-content-2>
@@ -94,8 +94,8 @@
                     role="tabpanel"
                   >
                     <city-transport
-                      v-bind:transports="totalCityInfos.transports"
-                      v-bind:cityName="cityName"
+                      :city-name="cityName"
+                      :transports="state.totalCityInfos.transports"
                     ></city-transport>
                   </div>
                 </template>
@@ -107,8 +107,8 @@
                     role="tabpanel"
                   >
                     <city-weather
-                      v-bind:weathers="totalCityInfos.weathers"
-                      v-bind:cityName="cityName"
+                      :city-name="cityName"
+                      :weathers="state.totalCityInfos.weathers"
                     ></city-weather>
                   </div>
                 </template>
@@ -128,7 +128,7 @@ import CityDetail from "@/components/city/CityDetail";
 import CityTransport from "@/components/city/CityTransport";
 import CityWeather from "@/components/city/CityWeather";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, reactive } from "vue";
 
 export default {
   name: "city-info",
@@ -139,33 +139,24 @@ export default {
     CityTransport,
     CityWeather,
   },
+  data() {
+    return {};
+  },
   props: {
     cityName: String,
+    totalCityInfos: Object,
   },
-  data() {
-    return {
-      totalCityInfos: [],
-    };
-  },
-  setup() {
+  setup(props) {
     const store = useStore();
     const cityMenus = computed(() => {
       return store.state.cityMenus;
     });
-    return { cityMenus };
-  },
-  created() {
-    this.getTotalCityInfo(this.cityName);
-    console.log(this.totalCityInfos);
-  },
-  methods: {
-    async getTotalCityInfo(cityName) {
-      this.totalCityInfos = await this.$api(
-        "http://localhost:8080/v1/api/city/" + cityName + "/total-infos"
-      ).then((response) => {
-        return response.data;
-      });
-    },
+
+    const state = reactive({
+      totalCityInfos: computed(() => props.totalCityInfos),
+    });
+
+    return { cityMenus, state };
   },
 };
 </script>

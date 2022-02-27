@@ -1,8 +1,8 @@
 <template>
   <div class="mb-0">
     <div class="card">
-      <div class="row g-0 pt-4">
-        <div class="col-md-3 p-2 text-center">
+      <div class="row g-0">
+        <div class="col-md-4 p-2 text-center">
           <slot name="card-schedule"> </slot>
         </div>
         <div class="col-md-8">
