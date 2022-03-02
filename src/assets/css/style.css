@@ -1980,7 +1980,7 @@ ol {
     margin-bottom: 30px;
 }
 
-.pd-text .pd-social a {
+.pd-text .pd-social button {
     display: inline-block;
     font-size: 14px;
     color: #111111;
@@ -1995,12 +1995,12 @@ ol {
     transition: all 0.3s;
 }
 
-.pd-text .pd-social a:hover {
+.pd-text .pd-social button:hover {
     background: #135762;
     color: #ffffff;
 }
 
-.pd-text .pd-social a:last-child {
+.pd-text .pd-social button:last-child {
     margin-right: 0;
 }
 

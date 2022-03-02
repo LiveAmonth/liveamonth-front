@@ -8,7 +8,7 @@
           }}</span
         >
       </li>
-      <li v-for="transport in state.transports" :key="transport">
+      <li v-for="transport in transports" :key="transport">
         <span class="type-name">{{
           $t("city.transport.name." + transport.category)
         }}</span>
@@ -18,7 +18,7 @@
     </ul>
     <ul class="right-table">
       <li><span class="type-title"> &nbsp;</span></li>
-      <li v-for="transport in state.transports" :key="transport">
+      <li v-for="transport in transports" :key="transport">
         <span class="type-name">{{
           $t("city.transport.name." + transport.category)
         }}</span>
@@ -30,26 +30,25 @@
 </template>
 
 <script>
-import { computed, reactive } from "vue";
+// import { computed, reactive } from "vue";
 
 export default {
   name: "city-transport",
   components: {},
   props: {
-    cityName: String,
     transports: Array,
   },
-  data() {
-    return {};
-  },
-  setup(props) {
-    const state = reactive({
-      cityName: computed(() => props.cityName),
-      transports: computed(() => props.transports),
-    });
-
-    return { state };
-  },
+  // data() {
+  //   return {};
+  // },
+  // setup(props) {
+  //   const state = reactive({
+  //     cityName: computed(() => props.cityName),
+  //     transports: computed(() => props.transports),
+  //   });
+  //
+  //   return { state };
+  // },
 };
 </script>
 

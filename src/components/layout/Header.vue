@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-lg-2">
             <div class="logo">
-              <router-link tag="a" to="/"
+              <router-link tag="a" :to="{ name: 'Home' }"
                 ><img :src="logoUrl" alt=""
               /></router-link>
             </div>
@@ -40,24 +40,9 @@
             <nav class="nav-menu">
               <ul class="mb-0">
                 <li>
-                  <router-link
-                    tag="a"
-                    :to="{ name: 'City', params: { cityName: 'SE' } }"
+                  <router-link tag="a" to="/city"
                     >{{ $t("menu.city") }}
                   </router-link>
-                  <ul class="dropdown">
-                    <li v-for="cityMenu in cityMenus" :key="cityMenu">
-                      <router-link
-                        tag="a"
-                        :to="{
-                          name: 'City',
-                          params: { cityName: cityMenu },
-                        }"
-                      >
-                        {{ $t("city.name." + cityMenu) }}
-                      </router-link>
-                    </li>
-                  </ul>
                 </li>
                 <li>
                   <router-link tag="a" to="/"

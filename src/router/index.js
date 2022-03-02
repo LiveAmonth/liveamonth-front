@@ -14,10 +14,9 @@ const routes = [
     component: Login,
   },
   {
-    path: "/city/:cityName",
+    path: "/city",
     name: "City",
     component: City,
-    props: true,
   },
 ];
 

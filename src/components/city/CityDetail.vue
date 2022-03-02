@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { computed, reactive } from "vue";
+// import { computed, reactive } from "vue";
 
 export default {
   name: "city-detail",
@@ -27,24 +27,19 @@ export default {
     content: String,
     image: String,
   },
-  data() {
-    return {
-      imagePath: "",
-    };
-  },
-  setup(props) {
-    const state = reactive({
-      cityName: computed(() => props.cityName),
-      content: computed(() => props.content),
-      image: computed(() => props.image),
-    });
-    return { state };
-  },
+  // setup(props) {
+  //   const state = reactive({
+  //     cityName: computed(() => props.cityName),
+  //     content: computed(() => props.content),
+  //     image: computed(() => props.image),
+  //   });
+  //   return { state };
+  // },
   created() {},
   computed: {
     translateIntroImg() {
       return {
-        img: this.image && require(`@/assets/img/intro/${this.state.image}`),
+        img: this.image && require(`@/assets/img/intro/${this.image}`),
       };
     },
   },

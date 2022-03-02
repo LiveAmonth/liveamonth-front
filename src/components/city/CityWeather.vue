@@ -32,16 +32,6 @@ export default {
   props: {
     weathers: Array,
   },
-  data() {
-    return {
-      simpleData: "",
-    };
-  },
-  setup() {},
-  created() {},
-  mounted() {},
-  unmounted() {},
-  methods: {},
 };
 </script>
 
