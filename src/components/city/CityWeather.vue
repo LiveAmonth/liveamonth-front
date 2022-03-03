@@ -30,6 +30,7 @@ export default {
   name: "city-weather",
   components: {},
   props: {
+    cityName: String,
     weathers: Array,
   },
 };

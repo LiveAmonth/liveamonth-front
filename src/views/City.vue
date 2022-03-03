@@ -13,7 +13,7 @@
                 <div class="col-lg-6">
                   <div class="pd-social">
                     <button
-                      class="button btn-outline-light p-1"
+                      class="btn btn-outline-light p-1 align-middle"
                       v-for="cityMenu in cityMenus"
                       :key="cityMenu"
                       @click="changeCity(cityMenu)"
@@ -80,7 +80,10 @@
                       aria-labelledby="nav-detail-tab"
                       role="tabpanel"
                     >
-                      <city-detail v-bind="totalCityInfos"></city-detail>
+                      <city-detail
+                        v-if="totalCityInfos != undefined"
+                        :details="details(totalCityInfos)"
+                      ></city-detail>
                     </div>
                   </template>
                   <template v-slot:tab-content-2>
@@ -91,7 +94,9 @@
                       role="tabpanel"
                     >
                       <city-transport
-                        :transports="totalCityInfos"
+                        v-if="totalCityInfos != undefined"
+                        :city-name="cityName"
+                        :transports="transports(totalCityInfos)"
                       ></city-transport>
                     </div>
                   </template>
@@ -102,7 +107,11 @@
                       aria-labelledby="nav-weather-tab"
                       role="tabpanel"
                     >
-                      <city-weather :weathers="totalCityInfos"></city-weather>
+                      <city-weather
+                        v-if="totalCityInfos"
+                        :city-name="cityName"
+                        :weathers="weathers(totalCityInfos)"
+                      ></city-weather>
                     </div>
                   </template>
                 </tab-board-slot>
@@ -112,7 +121,7 @@
         </div>
       </div>
     </section>
-    <city-food-and-view v-bind="foodsAndView" />
+    <city-food-and-view :foodsAndView="foodsAndView" />
   </div>
 </template>
 
@@ -126,7 +135,7 @@ import CityWeather from "@/components/city/CityWeather";
 import CityFoodAndView from "@/components/city/CityFoodAndView";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import CityService from "../services/city.service";
+import axios from "axios";
 
 export default {
   name: "City",
@@ -142,37 +151,48 @@ export default {
     const store = useStore();
 
     const cityName = ref("SE");
+    const totalCityInfos = ref({});
+    const foodsAndView = ref({});
+
     const cityMenus = computed(() => {
       return store.state.cityMenus;
     });
 
-    const totalCityInfos = computed(() => {
-      return getTotalCityInfos(cityName.value).then((data) => {
-        return data;
-      });
-    });
-    const foodsAndView = ref(
-      CityService.getFoodsAndView(cityName.value).then()
-    );
-    // const totalCityInfos = computed(() => {
-    //   if (store.state.city.totalCityInfos.data == null) {
-    //     store.dispatch("city/getTotalCityInfos", cityName.value);
-    //   }
-    //   return store.state.city.totalCityInfos.data;
-    // });
-    // const foodsAndView = computed(() => {
-    //   if (store.state.city.foodsAndView.data == null) {
-    //     store.dispatch("city/getFoodsAndView", cityName.value);
-    //   }
-    //   return store.state.city.foodsAndView.data;
-    // });
-
-    const changeCity = async (selectedCity) => {
-      cityName.value = selectedCity;
-      totalCityInfos.value = CityService.getTotalCityInfos(cityName.value);
-      foodsAndView.value = CityService.getFoodsAndView(cityName.value);
-      // await store.dispatch("city/getTotalCityInfos", cityName.value);
-      // await store.dispatch("city/getFoodsAndView", cityName.value);
+    const getInformation = async (cityName) => {
+      try {
+        const res1 = await axios.get(
+          "http://localhost:8080/v1/api/city/" + cityName + "/total-infos"
+        );
+        const res2 = await axios.get(
+          "http://localhost:8080/v1/api/city/" + cityName + "/foods-and-view"
+        );
+        totalCityInfos.value = res1.data.data;
+        foodsAndView.value = res2.data.data;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getInformation(cityName.value);
+    const changeCity = (selectedCity) => {
+      try {
+        cityName.value = selectedCity;
+        getInformation(selectedCity);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    const details = (totalCityInfo) => {
+      return {
+        cityName: totalCityInfo.cityName,
+        content: totalCityInfo.content,
+        image: totalCityInfo.image,
+      };
+    };
+    const transports = (totalCityInfo) => {
+      return totalCityInfo.transports;
+    };
+    const weathers = (totalCityInfo) => {
+      return totalCityInfo.weathers;
     };
 
     return {
@@ -180,6 +200,10 @@ export default {
       cityName,
       totalCityInfos,
       foodsAndView,
+      details,
+      transports,
+      weathers,
+      getInformation,
       changeCity,
     };
   },

@@ -5,7 +5,7 @@
         <title-slot>{{ $t("city.info.view") }}</title-slot>
       </div>
       <Carousel :autoplay="1800" :items-to-show="2.5" :wrap-around="true">
-        <Slide v-for="view in viewInfos" :key="view">
+        <Slide v-for="view in viewInfo(foodsAndView)" :key="view">
           <div class="carousel__item card bg-white text-white">
             <img class="card-img" v-bind:src="translateViewImg(view.image)" />
             <div class="card-img-overlay">
@@ -19,7 +19,7 @@
         <title-slot>{{ $t("city.info.food") }}</title-slot>
       </div>
       <Carousel :autoplay="1600" :items-to-show="2.5" :wrap-around="true">
-        <Slide v-for="food in foodInfos" :key="food">
+        <Slide v-for="food in foodInfo(foodsAndView)" :key="food">
           <div class="carousel__item card bg-white text-white">
             <img class="card-img" v-bind:src="translateFoodImg(food.image)" />
             <div class="card-img-overlay">
@@ -36,7 +36,6 @@
 import TitleSlot from "@/components/slot/TitleSlot";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
-// import { computed, reactive } from "vue";
 
 export default {
   name: "city-food-and-view",
@@ -46,16 +45,18 @@ export default {
     Slide,
   },
   props: {
-    foodInfos: Array,
-    viewInfos: Array,
+    foodsAndView: Object,
   },
-  // setup(props) {
-  //   const state = reactive({
-  //     foodInfos: computed(() => props.foodInfos),
-  //     viewInfos: computed(() => props.viewInfos),
-  //   });
-  //   return { state };
-  // },
+  setup() {
+    const foodInfo = (foodsAndView) => {
+      return foodsAndView.foodInfos;
+    };
+    const viewInfo = (foodsAndView) => {
+      return foodsAndView.viewInfos;
+    };
+
+    return { foodInfo, viewInfo };
+  },
   methods: {
     translateFoodImg(image) {
       return require("@/assets/img/food/" + image);
