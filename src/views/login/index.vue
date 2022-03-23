@@ -87,11 +87,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default {
-  name: "",
-  components: {},
-  data() {
-    return {};
-  },
+  name: "Login",
   setup() {
     const { error, login, isPending } = useLogin();
     const store = new useStore();

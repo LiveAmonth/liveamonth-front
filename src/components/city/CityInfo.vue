@@ -56,11 +56,7 @@
           aria-labelledby="nav-detail-tab"
           role="tabpanel"
         >
-          <city-detail
-            v-if="totalCityInfo != undefined"
-            :city-name="cityName()"
-            :details="details()"
-          ></city-detail>
+          <city-detail :details="details"></city-detail>
         </div>
       </template>
       <template v-slot:tab-content-2>
@@ -71,9 +67,8 @@
           role="tabpanel"
         >
           <city-transport
-            v-if="totalCityInfo != undefined"
-            :city-name="cityName()"
-            :transports="transports()"
+            :city-name="details.cityName"
+            :transports="transports"
           ></city-transport>
         </div>
       </template>
@@ -85,9 +80,8 @@
           role="tabpanel"
         >
           <city-weather
-            v-if="totalCityInfo != undefined"
-            :city-name="cityName()"
-            :weathers="weathers()"
+            :city-name="details.cityName"
+            :weathers="weather"
           ></city-weather>
         </div>
       </template>
@@ -100,6 +94,7 @@ import TabBoardSlot from "@/components/slot/TabBoardSlot";
 import CityDetail from "@/components/city/CityDetail";
 import CityTransport from "@/components/city/CityTransport";
 import CityWeather from "@/components/city/CityWeather";
+import { useCity } from "@/composables/city";
 
 export default {
   name: "city-info",
@@ -109,26 +104,9 @@ export default {
     CityTransport,
     CityWeather,
   },
-  props: {
-    totalCityInfo: Object,
-  },
-  setup(props) {
-    const cityName = () => {
-      return props.totalCityInfo.cityName;
-    };
-    const details = () => {
-      return {
-        content: props.totalCityInfo.content,
-        image: require("@/assets/img/intro/" + props.totalCityInfo.image),
-      };
-    };
-    const transports = () => {
-      return props.totalCityInfo.transports;
-    };
-    const weathers = () => {
-      return props.totalCityInfo.weathers;
-    };
-    return { cityName, details, transports, weathers };
+  setup() {
+    const { details, transports, weather } = useCity();
+    return { details, transports, weather };
   },
 };
 </script>

@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{ $t("city.name." + cityName) }}</h5>
+          <h5 class="card-title">{{ $t("city.name." + details.cityName) }}</h5>
           <p class="card-text">
             {{ details.content }}
           </p>
@@ -20,7 +20,6 @@
 export default {
   name: "city-detail",
   props: {
-    cityName: String,
     details: Object,
   },
 };

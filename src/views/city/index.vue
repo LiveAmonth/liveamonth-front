@@ -23,13 +23,13 @@
                   </div>
                 </div>
               </div>
-              <city-info :totalCityInfo="totalCityInfo"></city-info>
+              <city-info v-if="!isPending"></city-info>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <city-food-and-view :foodsAndView="foodsAndView" />
+    <city-food-and-view v-if="!isPending" />
   </div>
 </template>
 
@@ -39,7 +39,7 @@ import TitleSlot from "@/components/slot/TitleSlot";
 import CityFoodAndView from "@/components/city/CityFoodAndView";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import axios from "axios";
+import { useCity } from "@/composables/city";
 
 export default {
   name: "City",
@@ -58,43 +58,29 @@ export default {
     const store = useStore();
 
     const cityName = ref(props.name);
-    const totalCityInfo = ref({});
-    const foodsAndView = ref({});
-
     const cityMenus = computed(() => {
       return store.state.cityMenus;
     });
-
-    const getInformation = async (cityName) => {
-      try {
-        const res1 = await axios.get(
-          "http://localhost:8080/v1/api/city/" + cityName + "/total-infos"
-        );
-        const res2 = await axios.get(
-          "http://localhost:8080/v1/api/city/" + cityName + "/foods-and-view"
-        );
-        totalCityInfo.value = res1.data.data;
-        foodsAndView.value = res2.data.data;
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getInformation(cityName.value);
+    const { error, isPending, getTotalCityData, getFoodAndView } = useCity();
+    const totalCityInfo = ref(getTotalCityData(cityName.value));
+    const foodsAndView = ref(getFoodAndView(cityName.value));
     const changeCity = (selectedCity) => {
       try {
         cityName.value = selectedCity;
-        getInformation(selectedCity);
+        totalCityInfo.value = getTotalCityData(selectedCity);
+        foodsAndView.value = getFoodAndView(selectedCity);
       } catch (err) {
         console.log(err);
       }
     };
 
     return {
+      error,
+      isPending,
       cityMenus,
       cityName,
       totalCityInfo,
       foodsAndView,
-      getInformation,
       changeCity,
     };
   },
