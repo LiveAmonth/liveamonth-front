@@ -1,6 +1,5 @@
 import { createStore } from "vuex";
-import { auth } from "./auth.module";
-import { home } from "./home.module";
+import modules from "@/store/modules";
 // import createPersistedState from "vuex-persistedstate";
 
 const store = createStore({
@@ -16,20 +15,12 @@ const store = createStore({
         "faq",
         "personalTerms",
         "termsAndConditions",
-        "notice",
+        "notice"
       ],
-      footerMenus: ["city", "otherSchedule", "review"],
+      footerMenus: ["city", "otherSchedule", "review"]
     };
   },
-  modules: {
-    auth,
-    home,
-  },
-  // plugins: [
-  //   createPersistedState({
-  //     paths: [auth, home],
-  //   }),
-  // ],
+  modules
 });
 
 export default store;

@@ -7,7 +7,7 @@ const initSlideInfos = slideInfos ? { slideInfos } : { slideInfos: null };
 const initTopReviews = topReviews ? { topReviews } : { topReviews: null };
 const initTopSchedules = topSchedules ? { topSchedules } : { topSchedules: null };
 
-export const home = {
+export default {
   namespaced: true,
   state: {
     initSlideInfos,

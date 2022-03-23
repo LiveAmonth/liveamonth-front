@@ -19,8 +19,8 @@
               <!--              </div>-->
               <div class="form-group mt-3">
                 <label class="form-control-placeholder" for="loginId">{{
-                  $t("member.loginId")
-                }}</label>
+                    $t("member.loginId")
+                  }}</label>
                 <input
                   id="loginId"
                   type="text"
@@ -31,8 +31,8 @@
               </div>
               <div class="form-group">
                 <label class="form-control-placeholder" for="password">{{
-                  $t("member.password")
-                }}</label>
+                    $t("member.password")
+                  }}</label>
                 <input
                   id="password"
                   type="password"
@@ -60,17 +60,17 @@
 
             <p class="text-lg-end col">
               <router-link tag="a" to="/find-id" class="mx-2"
-                >{{ $t("member.findId") }}
+              >{{ $t("member.findId") }}
               </router-link>
               <router-link tag="a" to="/find-pw"
-                >{{ $t("member.findPw") }}
+              >{{ $t("member.findPw") }}
               </router-link>
             </p>
 
             <p class="text-center">
               {{ $t("member.notMember") }}
               <router-link tag="a" to="/sign-up"
-                >{{ $t("member.signUp") }}
+              >{{ $t("member.signUp") }}
               </router-link>
             </p>
           </div>
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import useLogin from "@/composables/useLogin";
+import { useLogin } from "@/composables/login";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -120,12 +120,14 @@ export default {
       password,
       handleSubmit,
       error,
-      isPending,
+      isPending
     };
   },
-  created() {},
-  mounted() {},
-  methods: {},
+  created() {
+  },
+  mounted() {
+  },
+  methods: {}
 };
 </script>
 
@@ -139,8 +141,8 @@ export default {
   width: 30%;
   padding-top: 40%;
   box-shadow: rgba(19, 87, 98, 0.4) 5px 5px, rgba(19, 87, 98, 0.3) 10px 10px,
-    rgba(19, 87, 98, 0.2) 15px 15px, rgba(19, 87, 98, 0.1) 20px 20px,
-    rgba(19, 87, 98, 0.05) 25px 25px;
+  rgba(19, 87, 98, 0.2) 15px 15px, rgba(19, 87, 98, 0.1) 20px 20px,
+  rgba(19, 87, 98, 0.05) 25px 25px;
   border-radius: 10px;
 }
 
@@ -260,7 +262,7 @@ textarea.form-control {
   background: #fff1f1;
   color: #135762;
   box-shadow: inset -3px -3px 5px rgba(225, 225, 225, 0.5),
-    inset 8px 0px 16px rgba(0, 0, 0, 0.1);
+  inset 8px 0px 16px rgba(0, 0, 0, 0.1);
 }
 
 a,

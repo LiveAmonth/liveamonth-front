@@ -1,13 +1,14 @@
-import axios from "axios";
+import axios from "@/axios";
 
-const API_URL = "http://localhost:8080";
 
 class CityService {
   async getTotalCityInfos(cityName) {
-    const res = await axios.get(
-      API_URL + "/v1/api/city/" + cityName + "/total-infos"
-    );
-    return res.data;
+    try {
+      const res = await axios.get(`city/${cityName}/total-infos`);
+      return res.data;
+    }catch (err){
+      console.log(err);
+    }
   }
 
   async getFoodsAndView(cityName) {
@@ -21,18 +22,22 @@ class CityService {
     return {
       cityName: totalCityInfo.cityName,
       content: totalCityInfo.content,
-      image: totalCityInfo.image,
+      image: totalCityInfo.image
     };
   }
+
   separateTransports(totalCityInfo) {
     return totalCityInfo.transports;
   }
+
   separateWeathers(totalCityInfo) {
     return totalCityInfo.weathers;
   }
+
   separateFoods(FoodsAndView) {
     return FoodsAndView.foodInfos;
   }
+
   separateView(FoodsAndView) {
     return FoodsAndView.viewInfos;
   }

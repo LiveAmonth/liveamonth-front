@@ -5,7 +5,7 @@ import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import i18n from "./i18n";
-import mixins from "@/mixins";
+import mixins from "@/axios";
 import VCalendar from "v-calendar";
 
 const app = createApp(App).use(i18n);

@@ -1,4 +1,4 @@
-import AuthService from "../services/user.service";
+import AuthService from "@/services/user.service";
 /**
  * 1. Server API 호출
  * 2. Response로 사용자정보(토큰)를 받음
@@ -10,19 +10,34 @@ const initialState = user
   ? { status: { loggedIn: true }, user }
   : { status: { loggedIn: false }, user: null };
 
-export const auth = {
+export default {
   namespaced: true,
   state: initialState,
+  // API 호출 값을 파라미터로 전달받은 후 state에 값을 저장
+  mutations: {
+    LOGIN_SUCCESS(state, payload) {
+      state.status.loggedIn = true;
+      state.user = payload;
+    },
+    LOGIN_FAIL(state) {
+      state.status.loggedIn = false;
+      state.user = null;
+    },
+    LOGOUT(state) {
+      state.status.loggedIn = false;
+      state.user = null;
+    },
+  },
   // Server API 호출
   actions: {
     login({ commit }, { username, password }) {
       return AuthService.login(username, password).then(
         (user) => {
-          commit("loginSuccess", user);
+          commit("LOGIN_SUCCESS", user);
           return Promise.resolve(user);
         },
         (error) => {
-          commit("loginFailure");
+          commit("LOGIN_FAIL");
           return Promise.resolve(error);
         }
       );
@@ -30,23 +45,5 @@ export const auth = {
     logout({ commit }) {
       AuthService.logout().then(() => commit("logout"));
     },
-  },
-  // API 호출 값을 파라미터로 전달받은 후 state에 값을 저장
-  mutations: {
-    loginSuccess(state, user) {
-      state.status.loggedIn = true;
-      state.user = user;
-    },
-    loginFailure(state) {
-      state.status.loggedIn = false;
-      state.user = null;
-    },
-    logout(state) {
-      state.status.loggedIn = false;
-      state.user = null;
-    },
-  },
-  getters: {
-    isLoggedIn: (state) => state.loginSuccess,
-  },
+  }
 };

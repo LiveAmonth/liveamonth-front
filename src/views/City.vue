@@ -126,7 +126,6 @@
 </template>
 
 <script>
-// import CityInfo from "@/components/city/CityInfo";
 import TitleSlot from "@/components/slot/TitleSlot";
 import TabBoardSlot from "@/components/slot/TabBoardSlot";
 import CityDetail from "@/components/city/CityDetail";
@@ -136,6 +135,7 @@ import CityFoodAndView from "@/components/city/CityFoodAndView";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
+import { useCity } from "@/composables/city";
 
 export default {
   name: "City",
@@ -145,7 +145,7 @@ export default {
     CityDetail,
     CityTransport,
     CityWeather,
-    CityFoodAndView,
+    CityFoodAndView
   },
   setup() {
     const store = useStore();
@@ -153,6 +153,10 @@ export default {
     const cityName = ref("SE");
     const totalCityInfos = ref({});
     const foodsAndView = ref({});
+    const {
+      getTotalCityData,
+      getFoodAndView
+    } = useCity();
 
     const cityMenus = computed(() => {
       return store.state.cityMenus;
@@ -185,7 +189,7 @@ export default {
       return {
         cityName: totalCityInfo.cityName,
         content: totalCityInfo.content,
-        image: totalCityInfo.image,
+        image: totalCityInfo.image
       };
     };
     const transports = (totalCityInfo) => {
@@ -204,9 +208,9 @@ export default {
       transports,
       weathers,
       getInformation,
-      changeCity,
+      changeCity
     };
-  },
+  }
 };
 </script>
 

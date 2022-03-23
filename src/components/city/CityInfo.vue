@@ -11,18 +11,14 @@
               </div>
               <div class="col-lg-6">
                 <div class="pd-social">
-                  <span
-                    class="p-1"
+                  <button
+                    class="btn btn-outline-light p-1 align-middle"
                     v-for="cityMenu in cityMenus"
                     :key="cityMenu"
+                    @click="changeCity(cityMenu)"
                   >
-                    <router-link
-                      tag="a"
-                      :to="{ name: 'City', params: { cityName: cityMenu } }"
-                    >
-                      {{ $t("city.name." + cityMenu) }}
-                    </router-link>
-                  </span>
+                    {{ $t("city.name." + cityMenu) }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -137,14 +133,14 @@ export default {
     TabBoardSlot,
     CityDetail,
     CityTransport,
-    CityWeather,
+    CityWeather
   },
   data() {
     return {};
   },
   props: {
     cityName: String,
-    totalCityInfos: Object,
+    totalCityInfos: Object
   },
   setup(props) {
     const store = useStore();
@@ -153,11 +149,11 @@ export default {
     });
 
     const state = reactive({
-      totalCityInfos: computed(() => props.totalCityInfos),
+      totalCityInfos: computed(() => props.totalCityInfos)
     });
 
     return { cityMenus, state };
-  },
+  }
 };
 </script>
 
