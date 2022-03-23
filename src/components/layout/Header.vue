@@ -40,7 +40,12 @@
             <nav class="nav-menu">
               <ul class="mb-0">
                 <li>
-                  <router-link tag="a" to="/city"
+                  <router-link
+                    tag="a"
+                    :to="{
+                      name: 'City',
+                      params: { name: 'SE' },
+                    }"
                     >{{ $t("menu.city") }}
                   </router-link>
                 </li>
