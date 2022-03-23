@@ -70,7 +70,7 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link tag="a" to="/myPage"
+                  <router-link tag="a" to="/my-page"
                     >{{ $t("menu.myPage") }}
                   </router-link>
                 </li>
