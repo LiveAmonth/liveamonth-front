@@ -5,7 +5,7 @@
         <title-slot>{{ $t("city.info.view") }}</title-slot>
       </div>
       <Carousel :autoplay="1800" :items-to-show="2.5" :wrap-around="true">
-        <Slide v-for="view in viewInfo(foodsAndView)" :key="view">
+        <Slide v-for="view in viewInfo()" :key="view">
           <div class="carousel__item card bg-white text-white">
             <img class="card-img" v-bind:src="translateViewImg(view.image)" />
             <div class="card-img-overlay">
@@ -19,7 +19,7 @@
         <title-slot>{{ $t("city.info.food") }}</title-slot>
       </div>
       <Carousel :autoplay="1600" :items-to-show="2.5" :wrap-around="true">
-        <Slide v-for="food in foodInfo(foodsAndView)" :key="food">
+        <Slide v-for="food in foodInfo()" :key="food">
           <div class="carousel__item card bg-white text-white">
             <img class="card-img" v-bind:src="translateFoodImg(food.image)" />
             <div class="card-img-overlay">
@@ -47,12 +47,12 @@ export default {
   props: {
     foodsAndView: Object,
   },
-  setup() {
-    const foodInfo = (foodsAndView) => {
-      return foodsAndView.foodInfos;
+  setup(props) {
+    const foodInfo = () => {
+      return props.foodsAndView.foodInfos;
     };
-    const viewInfo = (foodsAndView) => {
-      return foodsAndView.viewInfos;
+    const viewInfo = () => {
+      return props.foodsAndView.viewInfos;
     };
 
     return { foodInfo, viewInfo };
