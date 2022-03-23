@@ -1,6 +1,5 @@
 import { createStore } from "vuex";
 import modules from "@/store/modules";
-// import createPersistedState from "vuex-persistedstate";
 
 const store = createStore({
   state() {
@@ -20,7 +19,7 @@ const store = createStore({
       footerMenus: ["city", "otherSchedule", "review"]
     };
   },
-  modules
+  modules,
 });
 
 export default store;
