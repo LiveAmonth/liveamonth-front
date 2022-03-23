@@ -6,11 +6,13 @@ export const useCity = () => {
   const error = ref(null);
   const isPending = ref(false);
 
-  const transports = computed(() => store.getters["city/transportInTotalCityData"]);
+  const transports = computed(
+    () => store.getters["city/transportInTotalCityData"]
+  );
   const weather = computed(() => store.getters["city/weatherInTotalCityData"]);
-  const detail = computed(() => store.getters["city/detailInTotalCityData"]);
-  const food = computed(() => store.getters["city/foodInFoodAndView"]);
-  const view = computed(() => store.getters["city/viewInFoodAndView"]);
+  const details = computed(() => store.getters["city/detailInTotalCityData"]);
+  const foodInfo = computed(() => store.getters["city/foodInFoodAndView"]);
+  const viewInfo = computed(() => store.getters["city/viewInFoodAndView"]);
   const getTotalCityData = async (cityName = "SE") => {
     error.value = null;
     isPending.value = true;
@@ -35,7 +37,6 @@ export const useCity = () => {
       error.value = "도시 정보를 가져올 수 없습니다.";
       isPending.value = false;
     }
-
   };
 
   return {
@@ -43,10 +44,10 @@ export const useCity = () => {
     isPending,
     transports,
     weather,
-    detail,
-    food,
-    view,
+    details,
+    foodInfo,
+    viewInfo,
     getTotalCityData,
-    getFoodAndView
+    getFoodAndView,
   };
 };

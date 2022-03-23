@@ -10,7 +10,7 @@ export default {
   namespaced: true,
   state: {
     totalCityData: {},
-    foodAndView: {}
+    foodsAndView: {},
   },
   // Server API 호출
   actions: {
@@ -37,26 +37,26 @@ export default {
           return Promise.resolve(error);
         }
       );
-    }
+    },
   },
   // API 호출 값을 파라미터로 전달받은 후 state에 값을 저장
   mutations: {
     GET_TOTAL_CITY_DATA(state, data) {
-      state.totalCityData.data = data;
+      state.totalCityData = data;
     },
     GET_FOOD_AND_VIEW(state, data) {
-      state.foodsAndView.data = data;
+      state.foodsAndView = data;
     },
     GET_TOTAL_CITY_DATA_FAIL(state) {
-      state.totalCityData.data = null;
+      state.totalCityData = null;
     },
     GET_FOOD_AND_VIEW_FAIL(state) {
-      state.foodAndView.data = null;
+      state.foodAndView = null;
     },
     deleteStore(state) {
-      state.totalCityData.data = null;
-      state.foodAndView.data = null;
-    }
+      state.totalCityData = null;
+      state.foodAndView = null;
+    },
   },
   getters: {
     transportInTotalCityData(state) {
@@ -66,17 +66,17 @@ export default {
       return state.totalCityData.weathers;
     },
     foodInFoodAndView(state) {
-      return state.foodAndView.foodInfos;
+      return state.foodsAndView.foodInfos;
     },
     viewInFoodAndView(state) {
-      return state.foodAndView.viewInfos;
+      return state.foodsAndView.viewInfos;
     },
     detailInTotalCityData(state) {
       return {
         cityName: state.totalCityData.cityName,
         content: state.totalCityData.content,
-        image: require(`@/assets/img/intro/${state.totalCityData.image}`)
+        image: require(`@/assets/img/intro/${state.totalCityData.image}`),
       };
-    }
-  }
+    },
+  },
 };

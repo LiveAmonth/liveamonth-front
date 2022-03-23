@@ -5,9 +5,12 @@
         <title-slot>{{ $t("city.info.view") }}</title-slot>
       </div>
       <Carousel :autoplay="1800" :items-to-show="2.5" :wrap-around="true">
-        <Slide v-for="view in viewInfo()" :key="view">
+        <Slide v-for="view in viewInfo" :key="view">
           <div class="carousel__item card bg-white text-white">
-            <img class="card-img" v-bind:src="translateViewImg(view.image)" />
+            <img
+              class="card-img"
+              v-bind:src="translateImg('view', view.image)"
+            />
             <div class="card-img-overlay">
               <div class="card-title">{{ view.content }}</div>
             </div>
@@ -19,9 +22,12 @@
         <title-slot>{{ $t("city.info.food") }}</title-slot>
       </div>
       <Carousel :autoplay="1600" :items-to-show="2.5" :wrap-around="true">
-        <Slide v-for="food in foodInfo()" :key="food">
+        <Slide v-for="food in foodInfo" :key="food">
           <div class="carousel__item card bg-white text-white">
-            <img class="card-img" v-bind:src="translateFoodImg(food.image)" />
+            <img
+              class="card-img"
+              v-bind:src="translateImg('food', food.image)"
+            />
             <div class="card-img-overlay">
               <div class="card-title">{{ food.content }}</div>
             </div>
@@ -36,6 +42,7 @@
 import TitleSlot from "@/components/slot/TitleSlot";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+import { useCity } from "@/composables/city";
 
 export default {
   name: "city-food-and-view",
@@ -47,22 +54,13 @@ export default {
   props: {
     foodsAndView: Object,
   },
-  setup(props) {
-    const foodInfo = () => {
-      return props.foodsAndView.foodInfos;
-    };
-    const viewInfo = () => {
-      return props.foodsAndView.viewInfos;
-    };
-
+  setup() {
+    const { foodInfo, viewInfo } = useCity();
     return { foodInfo, viewInfo };
   },
   methods: {
-    translateFoodImg(image) {
-      return require("@/assets/img/food/" + image);
-    },
-    translateViewImg(image) {
-      return require("@/assets/img/view/" + image);
+    translateImg(category, image) {
+      return require(`@/assets/img/${category}/${image}`);
     },
   },
 };
@@ -106,6 +104,7 @@ export default {
   left: 10px;
   top: 10px;
 }
+
 .card {
   text-align: center;
   background: #ffffff;
