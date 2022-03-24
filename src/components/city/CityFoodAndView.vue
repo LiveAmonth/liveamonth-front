@@ -2,14 +2,16 @@
   <section class="agent-section spad">
     <div class="container">
       <div class="row">
-        <title-slot>{{ $t("city.info.view") }}</title-slot>
+        <title-slot>
+          <template v-slot:h3-title>{{ $t("city.info.view") }}</template>
+        </title-slot>
       </div>
       <Carousel :autoplay="1800" :items-to-show="2.5" :wrap-around="true">
         <Slide v-for="view in viewInfo" :key="view">
           <div class="carousel__item card bg-white text-white">
             <img
-              class="card-img"
-              v-bind:src="translateImg('view', view.image)"
+                class="card-img"
+                v-bind:src="translateImg('view', view.image)"
             />
             <div class="card-img-overlay">
               <div class="card-title">{{ view.content }}</div>
@@ -25,8 +27,8 @@
         <Slide v-for="food in foodInfo" :key="food">
           <div class="carousel__item card bg-white text-white">
             <img
-              class="card-img"
-              v-bind:src="translateImg('food', food.image)"
+                class="card-img"
+                v-bind:src="translateImg('food', food.image)"
             />
             <div class="card-img-overlay">
               <div class="card-title">{{ food.content }}</div>
@@ -40,9 +42,9 @@
 
 <script>
 import TitleSlot from "@/components/slot/TitleSlot";
-import { Carousel, Slide } from "vue3-carousel";
+import {Carousel, Slide} from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
-import { useCity } from "@/composables/city";
+import {useCity} from "@/composables/city";
 
 export default {
   name: "city-food-and-view",
@@ -55,8 +57,8 @@ export default {
     foodsAndView: Object,
   },
   setup() {
-    const { foodInfo, viewInfo } = useCity();
-    return { foodInfo, viewInfo };
+    const {foodInfo, viewInfo} = useCity();
+    return {foodInfo, viewInfo};
   },
   methods: {
     translateImg(category, image) {

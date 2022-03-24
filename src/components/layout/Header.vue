@@ -20,15 +20,13 @@
               </router-link>
             </div>
             <div class="ht-widget pt-4" v-else>
-              <router-link
-                  tag="a"
-                  to="/login"
+              <a
                   type="button"
                   @click="logout"
                   class="hw-btn text-decoration-none"
               >
                 {{ $t("member.logout") }}
-              </router-link>
+              </a>
             </div>
           </div>
         </div>
@@ -142,7 +140,7 @@ export default {
     const logout = async () => {
       await store.dispatch("auth/logout");
       if (!store.state.auth.status.loggedIn) {
-        await router.push({name: "Home"});
+        await router.push({name: "Login"});
       }
     };
     return {

@@ -2,7 +2,7 @@
   <div class="card">
     <div class="row g-0">
       <div class="col-md-4">
-        <img class="img-fluid rounded-start" :src="details.image" />
+        <img class="img-fluid rounded-start" :src="translateImg(details.image)"/>
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -21,6 +21,11 @@ export default {
   name: "city-detail",
   props: {
     details: Object,
+  },
+  methods: {
+    translateImg(image) {
+      return require(`@/assets/img/intro/${image}`);
+    },
   },
 };
 </script>
