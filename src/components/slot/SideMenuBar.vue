@@ -1,9 +1,11 @@
 <template>
   <div v-for="middleMenu in menus" :key="middleMenu">
-    <title-slot>{{ middleMenu.title }}</title-slot>
+    <title-slot>
+      <template v-slot:h4-title>{{ $t("myPage." + middleMenu.title + ".title") }}</template>
+    </title-slot>
     <ul>
       <li v-for="menu in middleMenu.contents" :key="menu">
-        <a class="pl-3" @click="changeMenu(menu)">{{ menu }}</a>
+        <a class="pl-3" @click="changeMenu(menu)">{{ $t("myPage." + middleMenu.title + "." + menu) }}</a>
       </li>
     </ul>
   </div>
@@ -11,7 +13,7 @@
 
 <script>
 import TitleSlot from "@/components/slot/TitleSlot";
-import { useMyPage } from "@/composables/myPage";
+import {useMyPage} from "@/composables/myPage";
 
 export default {
   name: "side-menu-bar",
@@ -19,7 +21,7 @@ export default {
     TitleSlot,
   },
   setup() {
-    const { menus } = useMyPage();
+    const {menus} = useMyPage();
     const changeMenu = (menu) => {
       console.log(menu);
     };

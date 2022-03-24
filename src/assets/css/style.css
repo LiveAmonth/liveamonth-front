@@ -1207,13 +1207,7 @@ ol {
   Feature Property
 -----------------------*/
 .feature-property-left {
-    /*background: #103230;*/
     padding: 0px 50px 40px 50px;
-    /*height: 520px;*/
-}
-
-.feature-property-left .section-title {
-    margin-bottom: 35px;
 }
 
 .feature-property-left .section-title h4 {
@@ -1223,6 +1217,7 @@ ol {
 
 .feature-property-left ul {
     margin-bottom: 45px;
+    padding-left: 5%;
 }
 
 .feature-property-left ul li {
@@ -1252,10 +1247,11 @@ ol {
     font-weight: 700;
     color: #135762;
     /*background: #ffffff;*/
-    padding: 15px 0;
+    padding: 15px 5px;
+    text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    /*text-align: center;*/
+    min-width: inherit;
 }
 .feature-property-left a:hover {
     color: white;

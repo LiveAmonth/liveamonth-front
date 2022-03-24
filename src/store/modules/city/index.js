@@ -75,7 +75,7 @@ export default {
       return {
         cityName: state.totalCityData.cityName,
         content: state.totalCityData.content,
-        image: require(`@/assets/img/intro/${state.totalCityData.image}`),
+        image: state.totalCityData.image,
       };
     },
   },

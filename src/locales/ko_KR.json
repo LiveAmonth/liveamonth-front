@@ -23,7 +23,11 @@
     "name": "이름",
     "nickname": "닉네임",
     "email": "이메일",
-    "gender": "성별",
+    "gender": {
+      "title": "성별",
+      "M": "남성",
+      "F": "여성"
+    },
     "age": {
       "start": "나이",
       "end": "세"
@@ -115,6 +119,23 @@
       "BS": "부산",
       "YS": "여수",
       "JJ": "제주"
+    }
+  },
+  "myPage": {
+    "account": {
+      "title": "계정",
+      "modify": "회원정보 수정",
+      "drop": "회원 탈퇴"
+    },
+    "community": {
+      "title": "커뮤니티",
+      "review": "게시글 관리",
+      "schedule": "스케줄 관리"
+    },
+    "inquiry": {
+      "title": "1:1 문의",
+      "writeInquiry": "문의 하기",
+      "inquiryAnswer": "문의 답변"
     }
   }
 }

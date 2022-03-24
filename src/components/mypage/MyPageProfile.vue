@@ -1,78 +1,271 @@
 <template>
   <section class="profile-section spad">
-    <!--    <div class="container">-->
-    <!--      <div class="profile-agent-content">-->
-    <!--        <div class="row">-->
-    <!--          <div class="col-lg-2">-->
-    <!--            <div class="ih-item circle effect13 top_to_bottom">-->
-    <!--              <a data-toggle="modal" href="#modifyScheduleContentModal">-->
-    <!--                <div class="img">-->
-    <!--                  <img-->
-    <!--                    v-if="image == null"-->
-    <!--                    :src="defaultImg"-->
-    <!--                    class="img-thumbnail img-circle mx-2"-->
-    <!--                  />-->
-    <!--                  <img-->
-    <!--                    v-else-->
-    <!--                    :src="image"-->
-    <!--                    class="img-thumbnail img-circle mx-2"-->
-    <!--                  />-->
-    <!--                </div>-->
-    <!--                <div class="info">-->
-    <!--                  <div class="info-back">-->
-    <!--                    <h3>[[${loginUser.nickname}]]</h3>-->
-    <!--                    <p>프로필 이미지 변경</p>-->
-    <!--                  </div>-->
-    <!--                </div>-->
-    <!--              </a>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--          <div class="col-lg-3">-->
-    <!--            <div class="profile-agent-widget">-->
-    <!--              <ul>-->
-    <!--                <li>[[#{login.name}]] <span>[[${loginUser.name}]]</span></li>-->
-    <!--                <li>-->
-    <!--                  [[#{login.nickname}]] <span>[[${loginUser.nickname}]]</span>-->
-    <!--                </li>-->
-    <!--              </ul>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--          <div class="col-lg-4">-->
-    <!--            <div class="profile-agent-widget">-->
-    <!--              <ul>-->
-    <!--                <li>-->
-    <!--                  [[#{login.age}]]-->
-    <!--                  <span>[[${loginUser.calcAge()}]][[#{age}]]</span>-->
-    <!--                </li>-->
-    <!--                <li>-->
-    <!--                  [[#{login.genderTypes}]]-->
-    <!--                  <span>[[#{'gender.'+${loginUser.genderTypes}}]]</span>-->
-    <!--                </li>-->
-    <!--                <li>[[#{login.email}]] <span>[[${loginUser.email}]]</span></li>-->
-    <!--              </ul>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <div class="container">
+      <div class="profile-agent-content">
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="ih-item circle effect13 top_to_bottom">
+              <a data-toggle="modal" href="#modifyScheduleContentModal">
+                <div class="img">
+                  <img
+                      :src="defaultImg"
+                  />
+                </div>
+                <div class="info">
+                  <div class="info-back">
+                    <h3>{{ user.nickname }}</h3>
+                    <p>프로필 이미지 변경</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="profile-agent-widget">
+              <ul>
+                <li>{{ $t("member.name") }} <span>{{ user.name }}</span></li>
+                <li>
+                  {{ $t("member.nickname") }} <span>{{ user.nickname }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="profile-agent-widget">
+              <ul>
+                <li>
+                  {{ $t("member.age.start") }}
+                  <span>{{ user.age }}{{ $t("member.age.end") }}</span>
+                </li>
+                <li>
+                  {{ $t("member.gender.title") }}
+                  <span>{{ $t("member.gender." + user.gender) }}</span>
+                </li>
+                <li>{{ $t("member.email") }} <span>{{ user.email }}</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
+import {useStore} from "vuex";
+import {computed} from "vue";
+
 export default {
-  name: "",
+  name: "my-page-profile",
   components: {},
-  data() {
-    return {
-      simpleData: "",
-    };
+  setup() {
+    const store = useStore();
+    const defaultImg = computed(() => {
+      return store.state.defaultProfile;
+    });
+    const user = computed(() => store.getters["auth/loggedInUser"]);
+    return {defaultImg, user}
+
   },
-  setup() {},
-  created() {},
-  mounted() {},
-  unmounted() {},
   methods: {},
 };
 </script>
 
-<style></style>
+<style scoped>
+.ih-item.circle {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.ih-item.circle .img {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.ih-item.circle .img:before {
+  position: absolute;
+  display: block;
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /*box-shadow: inset 0 0 0 16px rgba(255, 255, 255, 0.6), 0 1px 2px rgba(0, 0, 0, 0.3);*/
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+.ih-item.circle .img img {
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.ih-item.circle .info {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.ih-item.circle.effect13.colored .info {
+  background: #1a4a72;
+  background: rgba(26, 74, 114, 0.6);
+}
+
+.ih-item.circle.effect13 .info {
+  background: #333333;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+.ih-item.circle.effect13 .info h3 {
+  visibility: hidden;
+  color: #fff;
+  text-transform: uppercase;
+  position: relative;
+  letter-spacing: 2px;
+  font-size: 15px;
+  margin: 0 35px;
+  padding: 30px 0 0 0;
+  height: 80px;
+  text-shadow: 0 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.3);
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+.ih-item.circle.effect13 .info p {
+  visibility: hidden;
+  color: #bbb;
+  /*padding: 10px 5px;*/
+  font-style: italic;
+  margin: 0px;
+  font-size: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+.ih-item.circle.effect13 a:hover .info {
+  opacity: 1;
+}
+
+.ih-item.circle.effect13 a:hover h3 {
+  visibility: visible;
+}
+
+.ih-item.circle.effect13 a:hover p {
+  visibility: visible;
+}
+
+.ih-item.circle.effect13.from_left_and_right .info h3 {
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -o-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.ih-item.circle.effect13.from_left_and_right .info p {
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
+.ih-item.circle.effect13.from_left_and_right a:hover h3 {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.ih-item.circle.effect13.from_left_and_right a:hover p {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.ih-item.circle.effect13.top_to_bottom .info h3 {
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.ih-item.circle.effect13.top_to_bottom .info p {
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.ih-item.circle.effect13.top_to_bottom a:hover h3 {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.ih-item.circle.effect13.top_to_bottom a:hover p {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.ih-item.circle.effect13.bottom_to_top .info h3 {
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -o-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.ih-item.circle.effect13.bottom_to_top .info p {
+  -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  -o-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+.ih-item.circle.effect13.bottom_to_top a:hover h3 {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.ih-item.circle.effect13.bottom_to_top a:hover p {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+</style>

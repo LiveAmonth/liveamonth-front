@@ -8,28 +8,30 @@
               <div class="row pt-5">
                 <!--City 제목 및 도시 이름 리스트-->
                 <div class="col-lg-6">
-                  <title-slot>{{ $t("city.info.title") }}</title-slot>
+                  <title-slot>
+                    <template v-slot:h3-title>{{ $t("city.info.title") }}</template>
+                  </title-slot>
                 </div>
                 <div class="col-lg-6">
                   <div class="pd-social">
                     <button
-                      class="btn btn-outline-light p-1 align-middle"
-                      v-for="cityMenu in cityMenus"
-                      :key="cityMenu"
-                      @click="changeCity(cityMenu)"
+                        class="btn btn-outline-light p-1 align-middle"
+                        v-for="cityMenu in cityMenus"
+                        :key="cityMenu"
+                        @click="changeCity(cityMenu)"
                     >
                       {{ $t("city.name." + cityMenu) }}
                     </button>
                   </div>
                 </div>
               </div>
-              <city-info v-if="!isPending" />
+              <city-info v-if="!isPending"/>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <city-food-and-view v-if="!isPending" />
+    <city-food-and-view v-if="!isPending"/>
   </div>
 </template>
 
@@ -37,9 +39,9 @@
 import CityInfo from "@/components/city/CityInfo";
 import TitleSlot from "@/components/slot/TitleSlot";
 import CityFoodAndView from "@/components/city/CityFoodAndView";
-import { computed, ref } from "vue";
-import { useStore } from "vuex";
-import { useCity } from "@/composables/city";
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
+import {useCity} from "@/composables/city";
 
 export default {
   name: "City",
@@ -61,7 +63,7 @@ export default {
     const cityMenus = computed(() => {
       return store.state.cityMenus;
     });
-    const { error, isPending, getTotalCityData, getFoodAndView } = useCity();
+    const {error, isPending, getTotalCityData, getFoodAndView} = useCity();
     const totalCityInfo = ref(getTotalCityData(cityName.value));
     const foodsAndView = ref(getFoodAndView(cityName.value));
     const changeCity = (selectedCity) => {
