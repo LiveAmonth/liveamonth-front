@@ -6,27 +6,29 @@
           <div class="col-lg-2">
             <div class="logo">
               <router-link tag="a" :to="{ name: 'Home' }"
-                ><img :src="logoUrl" alt=""
+              ><img :src="logoUrl" alt=""
               /></router-link>
             </div>
           </div>
           <div class="col-lg-10">
             <div class="ht-widget pt-4" v-if="!loggedIn">
               <router-link tag="a" to="/login" class="hw-btn"
-                >{{ $t("member.login") }}
+              >{{ $t("member.login") }}
               </router-link>
               <router-link tag="a" to="/sign-up" class="hw-btn"
-                >{{ $t("member.signUp") }}
+              >{{ $t("member.signUp") }}
               </router-link>
             </div>
             <div class="ht-widget pt-4" v-else>
-              <a
-                type="button"
-                @click="logout"
-                class="hw-btn text-decoration-none"
+              <router-link
+                  tag="a"
+                  to="/login"
+                  type="button"
+                  @click="logout"
+                  class="hw-btn text-decoration-none"
               >
                 {{ $t("member.logout") }}
-              </a>
+              </router-link>
             </div>
           </div>
         </div>
@@ -41,50 +43,50 @@
               <ul class="mb-0">
                 <li>
                   <router-link
-                    tag="a"
-                    :to="{
+                      tag="a"
+                      :to="{
                       name: 'City',
                       params: { name: 'SE' },
                     }"
-                    >{{ $t("menu.city") }}
+                  >{{ $t("menu.city") }}
                   </router-link>
                 </li>
                 <li>
                   <router-link tag="a" to="/"
-                    >{{ $t("menu.schedule") }}
+                  >{{ $t("menu.schedule") }}
                   </router-link>
                   <ul class="dropdown">
                     <li
-                      v-for="scheduleMenu in scheduleMenus"
-                      :key="scheduleMenu"
+                        v-for="scheduleMenu in scheduleMenus"
+                        :key="scheduleMenu"
                     >
                       <router-link tag="a" to="/"
-                        >{{ $t("menu." + scheduleMenu) }}
+                      >{{ $t("menu." + scheduleMenu) }}
                       </router-link>
                     </li>
                   </ul>
                 </li>
                 <li>
                   <router-link tag="a" to="/"
-                    >{{ $t("menu.review") }}
+                  >{{ $t("menu.review") }}
                   </router-link>
                 </li>
                 <li>
-                  <router-link tag="a" to="/myPage"
-                    >{{ $t("menu.myPage") }}
+                  <router-link tag="a" to="/my-page"
+                  >{{ $t("menu.myPage") }}
                   </router-link>
                 </li>
                 <li>
                   <router-link tag="a" to="/"
-                    >{{ $t("menu.tCustomerCenter") }}
+                  >{{ $t("menu.tCustomerCenter") }}
                   </router-link>
                   <ul class="dropdown">
                     <li
-                      v-for="customerCenterMenu in customerCenterMenus"
-                      :key="customerCenterMenu"
+                        v-for="customerCenterMenu in customerCenterMenus"
+                        :key="customerCenterMenu"
                     >
                       <router-link tag="a" to="/"
-                        >{{ $t("menu.customerCenter." + customerCenterMenu) }}
+                      >{{ $t("menu.customerCenter." + customerCenterMenu) }}
                       </router-link>
                     </li>
                   </ul>
@@ -95,7 +97,7 @@
           <div class="col-lg-3">
             <div class="hn-social">
               <p v-if="loggedIn">
-                {{ $t("hello.name", { user: loggedInName }) }}
+                {{ $t("hello.name", {user: loggedInName}) }}
               </p>
             </div>
           </div>
@@ -106,9 +108,9 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import {computed} from "vue";
+import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 
 export default {
   name: "main-header",
@@ -140,7 +142,7 @@ export default {
     const logout = async () => {
       await store.dispatch("auth/logout");
       if (!store.state.auth.status.loggedIn) {
-        await router.push({ name: "Home" });
+        await router.push({name: "Home"});
       }
     };
     return {

@@ -23,7 +23,7 @@
                   </div>
                 </div>
               </div>
-              <city-info v-if="!isPending"></city-info>
+              <city-info v-if="!isPending" />
             </div>
           </div>
         </div>
