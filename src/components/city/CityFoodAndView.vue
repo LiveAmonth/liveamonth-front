@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <title-slot>
-          <template v-slot:h3-title>{{ $t("city.info.view") }}</template>
+          <template #title><h3>{{ $t("city.info.view") }}</h3></template>
         </title-slot>
       </div>
       <Carousel :autoplay="1800" :items-to-show="2.5" :wrap-around="true">
@@ -21,7 +21,9 @@
       </Carousel>
 
       <div class="row mt-5">
-        <title-slot>{{ $t("city.info.food") }}</title-slot>
+        <title-slot>
+          <template #title><h3>{{ $t("city.info.food") }}</h3></template>
+        </title-slot>
       </div>
       <Carousel :autoplay="1600" :items-to-show="2.5" :wrap-around="true">
         <Slide v-for="food in foodInfo" :key="food">

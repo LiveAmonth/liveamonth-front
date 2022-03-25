@@ -1,7 +1,7 @@
 <template>
   <div v-for="middleMenu in menus" :key="middleMenu">
     <title-slot>
-      <template v-slot:h4-title>{{ $t("myPage." + middleMenu.title + ".title") }}</template>
+      <template #title><h4>{{ $t("myPage." + middleMenu.title + ".title") }}</h4></template>
     </title-slot>
     <ul>
       <li v-for="menu in middleMenu.contents" :key="menu">

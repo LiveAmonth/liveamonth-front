@@ -1,7 +1,9 @@
 <template>
   <title-slot class="mt-5">
-    <template v-slot:h3-title>
-      {{ $t("home.popularContent") }}
+    <template #title>
+      <h3>
+        {{ $t("home.popularContent") }}
+      </h3>
     </template>
   </title-slot>
   <div class="card my-5">

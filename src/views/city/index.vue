@@ -9,7 +9,7 @@
                 <!--City 제목 및 도시 이름 리스트-->
                 <div class="col-lg-6">
                   <title-slot>
-                    <template v-slot:h3-title>{{ $t("city.info.title") }}</template>
+                    <template #title><h3>{{ $t("city.info.title") }}</h3></template>
                   </title-slot>
                 </div>
                 <div class="col-lg-6">
