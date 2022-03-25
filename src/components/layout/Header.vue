@@ -139,7 +139,7 @@ export default {
 
     const logout = async () => {
       await store.dispatch("auth/logout");
-      if (!store.state.auth.status.loggedIn) {
+      if (!store.getters["auth/isLoggedIn"]) {
         await router.push({name: "Login"});
       }
     };

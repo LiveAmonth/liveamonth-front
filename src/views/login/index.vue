@@ -98,7 +98,7 @@ export default {
 
     const handleSubmit = async () => {
       await login(username.value, password.value);
-      if (store.state.auth.status.loggedIn) {
+      if (store.getters["auth/isLoggedIn"]) {
         await router.push({ name: "Home" });
       }
     };

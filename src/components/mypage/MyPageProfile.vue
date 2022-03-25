@@ -39,7 +39,7 @@
                 </li>
                 <li>
                   {{ $t("member.gender.title") }}
-                  <span>{{ $t("member.gender." + user.gender) }}</span>
+                  <span>{{ $t(`member.gender.${user.gender}`) }}</span>
                 </li>
                 <li>{{ $t("member.email") }} <span>{{ user.email }}</span></li>
               </ul>

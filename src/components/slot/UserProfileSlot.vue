@@ -21,8 +21,9 @@
               {{ $t("member.nickname") }}: {{ nickname }}
             </p>
             <p class="card-text col-md-3">
-              {{ $t("member.gender") }}
-              <i v-bind:class="this.setGenderIcon(gender)"></i>
+              {{ $t("member.gender.title") }}:
+              {{ $t(`member.gender.${gender}`) }}
+
             </p>
             <p class="card-text col-md-3">
               {{ $t("member.age.start") }}: {{ age }}{{ $t("member.age.end") }}
