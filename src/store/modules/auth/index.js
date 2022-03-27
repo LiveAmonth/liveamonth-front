@@ -18,15 +18,14 @@ export default {
     actions: {
         login({commit}, {username, password}) {
             return AuthService.login(username, password).then(
-                (user) => {
+                user => {
                     commit("LOGIN_SUCCESS", user);
                     return Promise.resolve(user);
                 },
-                (error) => {
+                error => {
                     commit("LOGIN_FAIL");
-                    return Promise.resolve(error);
-                }
-            );
+                    throw error.response;
+                });
         },
         logout({commit}) {
             AuthService.logout().then(() => commit("LOGOUT"));
@@ -51,7 +50,7 @@ export default {
         isLoggedIn(state) {
             return state.status.loggedIn;
         },
-        loggedInUser(state){
+        loggedInUser(state) {
             return state.user;
         }
     }

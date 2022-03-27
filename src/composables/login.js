@@ -1,5 +1,6 @@
-import { ref } from "vue";
-import { useStore } from "vuex";
+import {ref} from "vue";
+import {useStore} from "vuex";
+import AuthService from "@/services/user.service";
 
 /**
  * 1. 서버와 통신
@@ -8,24 +9,56 @@ import { useStore } from "vuex";
  *    -> 다른 컴포넌트에서 사용가능
  */
 export const useLogin = () => {
-  const store = useStore();
-  const error = ref(null);
-  const isPending = ref(false);
+    const store = useStore();
+    const error = ref("");
+    const isPending = ref(false);
 
-  const login = async (username, password) => {
-    error.value = null;
-    isPending.value = true;
+    const login = async (username, password) => {
+        error.value = "";
+        isPending.value = true;
 
-    try {
-      // auth.module.js에 있는 login action 실행.
-      await store.dispatch("auth/login", { username, password });
-      error.value = null;
-      isPending.value = false;
-    } catch (err) {
-      error.value = "로그인 정보가 올바르지 않습니다.";
-      isPending.value = false;
-    }
-  };
+        // auth.module.js에 있는 login action 실행.
+        await store.dispatch("auth/login", {username, password}).then(
+            () => {
+                error.value = "";
+                isPending.value = false;
+            }
+        ).catch(
+            (err) => {
+                console.log(err);
+                error.value = "아이디 또는 비밀번호가 일치하지 않습니다.";
+                isPending.value = false;
+            }
+        )
+    };
 
-  return { error, login, isPending };
+    return {error, login, isPending};
 };
+
+export const useReCheck = () => {
+    const error = ref("");
+    const isPending = ref(false);
+    const result = ref(false);
+    const reCheck = async (username, password) => {
+        error.value = "";
+        isPending.value = true;
+        result.value = false;
+
+        await AuthService.reCheckPassword(username, password).then(
+            () => {
+                error.value = "";
+                isPending.value = false;
+                result.value = true;
+            }
+        ).catch(
+            (err) => {
+                console.log(err);
+                error.value = "비밀번호가 일치하지 않습니다.";
+                isPending.value = false;
+                result.value = false;
+            }
+        )
+    };
+
+    return {error, reCheck, isPending, result};
+}
