@@ -14,6 +14,7 @@
 <script>
 import TitleSlot from "@/components/slot/TitleSlot";
 import {useMyPage} from "@/composables/myPage";
+import {getCurrentInstance} from "vue";
 
 export default {
   name: "side-menu-bar",
@@ -22,8 +23,10 @@ export default {
   },
   setup() {
     const {menus} = useMyPage();
+    const {emit} = getCurrentInstance();
+
     const changeMenu = (menu) => {
-      console.log(menu);
+      emit('click', menu);
     };
     return {
       menus,

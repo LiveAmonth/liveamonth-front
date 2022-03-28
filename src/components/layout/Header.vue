@@ -70,7 +70,7 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link tag="a" to="/my-page"
+                  <router-link tag="a" :to="{name:'MyPage.reCheck', params: { page: 'modify' }}"
                   >{{ $t("menu.myPage") }}
                   </router-link>
                 </li>
